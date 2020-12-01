@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DB_A6B512_dmatarrita2" Class="ErroresDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=sql5086.site4now.net;Initial Catalog=DB_A6B512_dmatarrita2;Persist Security Info=True;User ID=DB_A6B512_dmatarrita2_admin;MultipleActiveResultSets=True;Application Name=EntityFramework" SettingsObjectName="Capa.Utilidades.Properties.Settings" SettingsPropertyName="DB_A6B512_dmatarrita2ConnectionString" Provider="System.Data.SqlClient" />
+  <Function Name="dbo.sp_InsertarErrorLog" Method="sp_InsertarErrorLog">
+    <Parameter Name="MetodoError" Parameter="metodoError" Type="System.String" DbType="VarChar(300)" />
+    <Parameter Name="Clase" Parameter="clase" Type="System.String" DbType="VarChar(60)" />
+    <Parameter Name="ErrorReportado" Parameter="errorReportado" Type="System.String" DbType="VarChar(400)" />
+    <Parameter Name="LineaError" Parameter="lineaError" Type="System.String" DbType="VarChar(400)" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

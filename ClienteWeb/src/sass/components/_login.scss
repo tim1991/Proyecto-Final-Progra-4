@@ -1,0 +1,52 @@
+.hero {
+    min-height: 800px;
+    background-size: cover !important;
+    background-position: center !important;
+
+    .caption{
+        color: white;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .logo {
+        float: left;
+        font-size: 20px;
+        color: white;
+        line-height: 60px;
+    }
+
+    .nav {
+        margin-top: 20px;
+        display: block;
+        float: right;
+        width: 100%;
+
+        ul {
+            padding: 0;
+            float: right;
+            margin-top: 20px;
+
+            li {
+                display: inline-block;
+                margin-right: 10px;
+                font-size: 18px;
+
+                a {
+                    color: white;
+                }
+            }
+        }
+    }
+}
+
+.login-form {
+    padding: 20px;
+    background: white;
+    width: 350px;
+    margin: 20px auto;
+    display: block;
+    border-radius: 10px;
+
+}

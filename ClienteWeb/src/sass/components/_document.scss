@@ -1,0 +1,635 @@
+.document-body {
+    width: 90%;
+    max-width: 1050px;
+    margin: 10px auto;
+    background: white;
+    padding: 10px;
+    box-shadow: 0 8px 32px rgba(77, 101, 117, 0.35);
+    border-radius: 12px;
+    position: relative;
+
+    @include mq('tablet') {
+        width: 100%;
+        margin-top: 30px;
+        overflow-x: hidden;
+    }
+
+    .input-group {
+        width: auto;
+        float: right;
+    }
+
+    .imp {
+        float: right;
+        height: 50px;
+        line-height: 50px;
+        margin-left: 10px;
+
+        a {
+            cursor: pointer;
+            background: #136acd;
+            width: 30px;
+            display: inline-block;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border-radius: 30px;
+            font-size: 15px;
+            color: white;
+            margin-left: 10px;
+        }
+    }
+
+    .estado {
+        position: absolute;
+        top: -25px;
+        background: white;
+        padding: 5px 20px 11px;
+        left: 0px;
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+        z-index: 3;
+
+        i {
+            color: #607D8B;
+        }
+    }
+
+    .totales {
+        width: 55%;
+        float: right;
+        display: flex;
+        flex-wrap: wrap;
+        font-size: 16px;
+
+        @include mq('tablet') {
+            width: 100%;
+        }
+
+        span {
+            font-size: 16px;
+            color: black;
+            font-weight: 500;
+            float: left;
+            height: 50px;
+            line-height: 50px;
+            margin-right: 10px;
+            float: right;
+        }
+
+        .form-control {
+            float: right;
+            width: auto;
+            background: white;
+            border: 1px solid #b2c2cd;
+            width: 80%;
+
+            @include mq('tablet') {
+                width: 100%;
+            }
+        }
+
+        .separator {
+            border-top: solid 1px #dee2e6;
+            padding-top: 10px;
+        }
+    }
+
+    .form-control {
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+
+    .cient-section {
+        width: 300px;
+        float: left;
+        position: relative;
+
+        @include mq('tablet') {
+            width: 100%;
+            margin-bottom: 5px;
+        }
+
+        .client-info {
+            width: 100%;
+            padding: 20px 10px;
+            height: 150px;
+            overflow: hidden;
+            border-radius: 12px;
+            border: solid 1px #b2c2cd;
+            cursor: pointer;
+            transition: all .5s ease;
+
+            &:hover {
+                border-color: #136acd;
+                background-color: #f8fafc;
+                transition: all .5s ease;
+            }
+
+            span {
+                float: left;
+                width: 100%;
+
+                &.title {
+                    float: left;
+                    width: calc(100% - 50px);
+                    font-size: 18px;
+                    color: #136acd;
+                    margin-bottom: 10px;
+                    padding-left: 50px;
+                    overflow: hidden;
+                }
+            }
+        }
+
+        .search-client-panel {
+            position: absolute;
+            width: 100%;
+            background: white;
+            float: left;
+            border-radius: 6px;
+            padding: 10px;
+            box-shadow: 0 0 0 1px rgba(77, 101, 117, 0.1), 0 3px 10px 0 rgba(77, 101, 117, 0.2);
+            top: 0;
+            z-index: 9;
+
+            a {
+                float: left;
+                width: 100%;
+                height: 40px;
+                margin-top: 13px;
+                text-align: center;
+                line-height: 40px;
+                font-size: 16px;
+            }
+        }
+
+        .client-btn {
+            font-weight: bold;
+            padding: 0;
+            border: dashed 2px #A2B6C4;
+            width: 100%;
+            float: left;
+            height: 140px;
+            border-radius: 12px;
+            font-size: 15px;
+            color: #136acd;
+            transition: all 0.5s ease;
+            background: white;
+
+            &:hover {
+                border-color: #136acd;
+                background-color: #f8fafc;
+                transition: all .5s ease;
+            }
+
+            i {
+                background: #ecf0f3;
+                width: 50px;
+                height: 50px;
+                line-height: 50px;
+                border-radius: 50px;
+                text-align: center;
+                color: #97a8b3;
+                margin-right: 10px;
+                font-size: 20px;
+            }
+
+        }
+    }
+
+
+
+    .add-line {
+
+        td {
+            padding: 0;
+        }
+
+        button {
+            width: 100%;
+            float: left;
+            height: 60px;
+            background: #dee2e6;
+            border: none;
+            color: #6d7f8b;
+            font-weight: 500;
+            font-size: 18px;
+            -webkit-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            background: #dde1f9;
+            color: #3f51b5;
+
+            svg {
+                background: #c4c6ce;
+                padding: 4px;
+                width: 25px;
+                height: 25px;
+                line-height: 25px;
+                display: inline-block;
+                border-radius: 25px;
+                margin-bottom: -3px;
+            }
+
+            &:hover {
+                background: #3f51b5;
+                color: white;
+                transition: all 0.5s ease;
+            }
+        }
+    }
+
+    .items-list {
+        padding: 0;
+
+        li {
+            float: left;
+            width: 100%;
+            list-style: none;
+            padding: 10px 10px 10px 50px;
+            border-bottom: solid 1px #b2c2cd;
+            margin-bottom: 5px;
+
+            .detail {
+                float: left;
+                width: 50%;
+
+                h4 {
+                    font-size: 18px;
+                }
+            }
+
+            .delete-icon {
+                float: right;
+                width: 30px;
+                height: 30px;
+                background: #43b9fb;
+                text-align: center;
+                border-radius: 30px;
+                line-height: 30px;
+                text-align: center;
+                color: white;
+                position: absolute;
+                left: 20px;
+            }
+
+            .total-linea {
+                float: right;
+                width: 50%;
+                text-align: right;
+            }
+
+            .cantidad {
+                float: left;
+                width: 100%;
+
+                span {
+                    display: inline-block;
+                    padding: 3px;
+                    color: white;
+                    background: #b2c2cd;
+                    border-radius: 4px;
+                }
+
+                p {
+                    float: right;
+                }
+            }
+        }
+    }
+
+    table {
+        table-layout: fixed;
+        width: 100%;
+
+        strong {
+            font-weight: 500;
+            font-size: 18px;
+            color: #2f3031;
+        }
+
+        thead {
+            tr {
+                background: #ecf0f3;
+                border-color: #b2c2cd;
+            }
+        }
+
+        tbody {
+            tr {
+
+                color: #1c252c;
+
+                td {
+                    border: none;
+                }
+
+
+                .form-control {
+                    background: white;
+                    border: 1px solid #b2c2cd;
+                }
+            }
+        }
+
+
+        .impuestos {
+            border-bottom: solid 1px #a2b6c3;
+
+            ul {
+                padding: 0;
+
+                li {
+                    display: inline-block;
+                    margin-right: 10px;
+                    margin-bottom: 18px;
+
+                    a {
+                        padding: 8px;
+                        border-radius: 12px;
+                        background: #ffffff;
+                        color: #657784;
+                        font-size: 14px;
+                        transition: all 0.5s ease;
+                        cursor: pointer;
+
+                        &.active {
+                            background: #8bc34a;
+                            border-color: #8bc44a;
+                            color: white;
+
+                            i {
+                                background: white;
+                            }
+
+                        }
+
+                        i {
+                            background: rgb(178, 194, 205);
+                            padding: 3px;
+                            width: 25px;
+                            height: 25px;
+                            border-radius: 25px;
+                            line-height: 19px;
+                            text-align: center;
+                            font-size: 12px;
+                            color: #657784;
+                        }
+
+                        &:hover {
+                            background: #dde1f9;
+                            color: #3f51b5;
+                            transition: all .5s ease;
+                        }
+
+                    }
+
+
+
+                }
+            }
+        }
+    }
+
+}
+
+.product-add-panel {
+    float: left;
+    width: 90%;
+    position: absolute;
+    background: white;
+    z-index: 1;
+    box-shadow: 0 0 0 1px rgba(77, 101, 117, 0.1), 0 3px 10px 0 rgba(77, 101, 117, 0.2);
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px;
+    padding-bottom: 0;
+
+    .close-panel {
+        margin-bottom: 10px;
+        color: #136acd;
+        cursor: pointer;
+    }
+
+    ul {
+        padding: 0;
+
+        li {
+            float: left;
+            width: 100%;
+            float: left;
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            list-style: none;
+            font-size: 16px;
+            color: #a2b6c3;
+            cursor: pointer;
+            transition: all .5s ease;
+            padding: 0 10px;
+
+            &:hover {
+                background: #a2b6c32b;
+                transition: all .5s ease;
+            }
+
+            span {
+                float: right;
+                font-size: 18px;
+                color: black;
+            }
+        }
+    }
+
+    .add {
+        display: inline-block;
+        width: 100%;
+        padding: 10px;
+        text-align: center;
+        font-size: 18px;
+        border-top: solid 1px #dee2e6;
+    }
+}
+
+.txt-right {
+    text-align: right;
+    border-bottom: #dee2e6 1px dashed;
+
+}
+
+.input-group-rounded {
+    width: 100% !important;
+    position: relative;
+
+    .input-group-btn {
+        position: absolute;
+        right: 4px;
+        top: 40%;
+        transform: translateY(-50%);
+        z-index: 9;
+
+        .btn {
+            width: 40px;
+            padding: 0;
+            height: 40px;
+            border-radius: 40px;
+        }
+    }
+}
+
+.label-info {
+    height: 50px;
+    line-height: 50px;
+    font-weight: bold;
+    color: #748692;
+    background: #ecf0f3;
+
+    @include mq('tablet') {
+        display: none;
+    }
+}
+
+.separator {
+    border-top: dashed 1px #b2c2cd;
+    margin-top: 50px;
+    padding-top: 20px;
+}
+
+.wv-button--link {
+    @include mq('tablet') {
+        background: #dfdfdf;
+        width: 100%;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        color: #676767;
+        border: none;
+        font-size: 16px;
+        height: 70px;
+
+        svg {
+            color: rgba(255, 255, 255, 0.68);
+            font-size: 24px;
+        }
+
+    }
+}
+
+.miniInput {
+    label {
+        margin-bottom: 0;
+    }
+
+    input,
+    select {
+        border: none !important;
+        background: transparent;
+        border-bottom: solid 2px #b2c2cd !important;
+        border-radius: 0;
+        color: black;
+        font-weight: bold;
+        font-size: 12px;
+        padding: 0;
+        margin: 0;
+        height: 30px;
+    }
+}
+
+.card-item {
+
+    background: #fdfdfd;
+    padding: 10px;
+    border-bottom: solid 2px;
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, .125);
+
+    h4 {
+        font-size: 18px;
+        color: black;
+    }
+
+    h5 {
+        text-align: right;
+    }
+
+}
+
+.header-custom-tb tbody:nth-child(even) {
+    background: #f0f4fa
+}
+
+.header-custom-tb tbody:nth-child(odd) {
+    background: #FFF
+}
+
+.filter-items-list {
+    padding: 0;
+
+    li {
+        display: inline-block;
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        text-align: center;
+        border-radius: 8px;
+        background: #f5f6fb;
+        margin: 5px;
+        font-weight: bold;
+        cursor: pointer;
+
+        &.manualItem {
+            width: auto;
+            padding: 0 10px;
+            background: #0d5bb7;
+            color: white;
+        }
+    }
+}
+
+.totalScreen {
+    color: #ffffff;
+    background: #495057;
+    font-weight: bold;
+    padding: 10px 10px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+
+    .moneda {
+        float: left;
+        width: 100px;
+
+        select {
+            background: transparent;
+            border: none !important;
+            width: 90px;
+            padding: 0px;
+            color: #ff9800;
+            font-weight: bold;
+        }
+    }
+
+    .totalItem {
+        float: left;
+        width: calc(100% - 100px);
+        text-align: right;
+    }
+}
+
+.prodPanel {
+    background: #f0f2f4;
+    padding: 10px;
+    border-radius: 8px;
+    min-height: 300px;
+
+    .card {
+        margin-bottom: 15px;
+    }
+}
+.currentView {
+    background: #28a745;
+    color: white;
+}

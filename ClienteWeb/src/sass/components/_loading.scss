@@ -1,0 +1,37 @@
+.loading{
+    position: fixed;
+    z-index: 9;
+    left: 50%;
+    background: linear-gradient(45deg, hsla(168, 80%, 68%, 0.15), rgba(4, 20, 90, 1));
+    padding: 10px;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    width: 100%;
+    left: 0;
+    height: 100%;
+    text-align: center;
+    line-height: 50vh;
+    color: #ffffff;
+    text-shadow: black;
+    font-weight: bold;
+    font-size: 25px;
+    img{
+        width: 90px;
+    }
+}
+
+.line-number{
+    position: absolute;
+    left: -15px;
+    background: #f39731;
+    width: 30px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #ffffff;
+    font-size: 16px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    font-weight: bold;
+}

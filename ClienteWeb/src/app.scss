@@ -1,0 +1,41 @@
+//*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*
+//*-¡*-¡*-¡*-¡*-¡*-¡*-¡ External dependencies *-¡*-¡*-¡*-¡*-¡*-¡*-
+//*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*
+
+// Start Bootstrap
+@import '~pretty-checkbox/src/pretty-checkbox.scss';
+@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/type";
+@import "~bootstrap/scss/images";
+@import "~bootstrap/scss/code";
+@import "~bootstrap/scss/grid";
+// End Bootstrap
+
+//Start slick
+@import "~slick-carousel/slick/slick.scss";
+//End slick
+
+//Start AOS
+@import "~aos/dist/aos.css";
+@import "~jquery-confirm/dist/jquery-confirm.min.css";
+//End AOS
+
+//*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*
+//*-¡*-¡*-¡*-¡*-¡*-¡*-¡ END External dependencies *-¡*-¡*-¡*-¡*-¡*
+//*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*-¡*
+
+//Start Components
+@import "./sass/_mixins.scss";
+@import "./sass/components/_general.scss";
+@import "./sass/components/_buttons.scss";
+@import "./sass/components/_login.scss";
+@import "./sass/components/_loading.scss";
+@import "./sass/components/_document.scss";
+@import "./sass/components/_calendar.scss";
+@import "./sass/components/_colors.scss";
+@import "./sass/components/_ecommerce.scss";
+//End Components
