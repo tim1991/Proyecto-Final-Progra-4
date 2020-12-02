@@ -10,14 +10,12 @@ namespace Capa.AccesoDatos
     public class AccesoDatos
     {
 
+        private List<Producto> listaProductos = new List<Producto>();
+
         /// <summary>
         /// Obtiene la todos los productos por categoria
         /// </summary>
         /// <returns></returns>
-        ///
-        ///
-
-        private List<Producto> listaProductos = new List<Producto>();
         public List<Producto> ObtenerProductos()
         {
             try
@@ -50,7 +48,7 @@ namespace Capa.AccesoDatos
                 GuardaErrores ErroresLog = new GuardaErrores();
                 string NombreMetodo = System.Reflection.MethodBase.GetCurrentMethod().Name;
                 ErroresLog.InsertarErrores(NombreMetodo, "AccesoDatosProducto", ex.Message, ex.StackTrace);
-                return null;
+                return listaProductos;
             }
         }
 
@@ -90,7 +88,7 @@ namespace Capa.AccesoDatos
                 GuardaErrores ErroresLog = new GuardaErrores();
                 string NombreMetodo = System.Reflection.MethodBase.GetCurrentMethod().Name;
                 ErroresLog.InsertarErrores(NombreMetodo, "AccesoDatosProducto", ex.Message, ex.StackTrace);
-                return null;
+                return listaProductos;
             }
         }
     }

@@ -2,23 +2,23 @@
 using System;
 using System.Collections.Generic;
 using Capa.Utilidades.GuardaErrores;
-;
 
 namespace Capa.LogicaNegocio.Productos
 {
     public class ProductosLogica
     {
 
+        public List<Producto> objProduc = new List<Producto>();
+
         /// <summary>
         /// Logica para obtener los productos x categoria
         /// </summary>
         /// <param name="IdCategoria"></param>
         /// <returns></returns>
-        public Producto ObtieneProductosXCategoria(int IdCategoria)
+        public List<Producto> ObtieneProductosXCategoria(int IdCategoria)
         {
             try
             {
-                Producto objProduc = new Producto();
                 Capa.AccesoDatos.AccesoDatos Producto = new Capa.AccesoDatos.AccesoDatos();
                 objProduc = Producto.ObtenerProductosXCategoria(IdCategoria);
                 return objProduc;
@@ -40,7 +40,7 @@ namespace Capa.LogicaNegocio.Productos
         {
             try
             {
-                List<Producto> objProduc = new List<Producto>();
+
                 Capa.AccesoDatos.AccesoDatos Producto = new Capa.AccesoDatos.AccesoDatos();
                 objProduc = Producto.ObtenerProductos();
                 return objProduc;
