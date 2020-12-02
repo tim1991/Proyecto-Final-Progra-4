@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Capa.Utilidades.GuardaErrores;
+;
 
 namespace Capa.LogicaNegocio.Productos
 {
@@ -18,7 +19,7 @@ namespace Capa.LogicaNegocio.Productos
             try
             {
                 Producto objProduc = new Producto();
-                AccesoDatos.AccesoDatos Producto = new AccesoDatos.AccesoDatos();
+                Capa.AccesoDatos.AccesoDatos Producto = new Capa.AccesoDatos.AccesoDatos();
                 objProduc = Producto.ObtenerProductosXCategoria(IdCategoria);
                 return objProduc;
             }
@@ -40,7 +41,7 @@ namespace Capa.LogicaNegocio.Productos
             try
             {
                 List<Producto> objProduc = new List<Producto>();
-                AccesoDatos.AccesoDatos Producto = new AccesoDatos.AccesoDatos();
+                Capa.AccesoDatos.AccesoDatos Producto = new Capa.AccesoDatos.AccesoDatos();
                 objProduc = Producto.ObtenerProductos();
                 return objProduc;
             }
