@@ -40,7 +40,6 @@ namespace Capa.LogicaNegocio.Productos
         {
             try
             {
-
                 Capa.AccesoDatos.AccesoDatos Producto = new Capa.AccesoDatos.AccesoDatos();
                 objProduc = Producto.ObtenerProductos();
                 return objProduc;
