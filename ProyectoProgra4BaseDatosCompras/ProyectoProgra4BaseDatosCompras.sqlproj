@@ -153,5 +153,12 @@
     <Build Include="dbo\StoredProcedures\sp_ObtieneProductosPorCategoria.sql" />
     <Build Include="dbo\StoredProcedures\sp_InsertarErrorLog.sql" />
     <Build Include="dbo\StoredProcedures\sp_ObtieneProductos.sql" />
+    <Build Include="dbo\StoredProcedures\sp_ActualizarCarritoPorCliente.sql" />
+    <Build Include="dbo\StoredProcedures\sp_InsertarCarritoPorCliente.sql" />
+    <Build Include="dbo\StoredProcedures\sp_ObtieneCarritoPorCliente.sql" />
+    <Build Include="dbo\StoredProcedures\sp_EliminarCarritoPorCliente.sql" />
+    <Build Include="dbo\StoredProcedures\sp_InsertarDatosCliente.sql" />
+    <Build Include="dbo\StoredProcedures\sp_ActualizarDatosCliente.sql" />
+    <Build Include="dbo\StoredProcedures\sp_ObtieneDatosClientePorCliente.sql" />
   </ItemGroup>
 </Project>
