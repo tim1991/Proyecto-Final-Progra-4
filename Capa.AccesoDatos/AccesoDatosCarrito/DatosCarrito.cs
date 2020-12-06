@@ -24,7 +24,8 @@ namespace Capa.AccesoDatos.AccesoDatosCarrito
             {
                 using (CarritoDataContext CarritoBD = new CarritoDataContext())
                 {
-                    resultado = CarritoBD.sp_InsertarCarritoPorCliente(IdUsuario, IdProducto, Cantidad);
+                    CarritoBD.sp_InsertarCarritoPorCliente(IdUsuario, IdProducto, Cantidad);
+                    resultado = 1;
                     return resultado;
                 }
             }
@@ -52,7 +53,8 @@ namespace Capa.AccesoDatos.AccesoDatosCarrito
             {
                 using (CarritoDataContext CarritoBD = new CarritoDataContext())
                 {
-                    resultado = CarritoBD.sp_ActualizarCarritoPorCliente(IdUsuario, IdProducto, Cantidad);
+                    CarritoBD.sp_ActualizarCarritoPorCliente(IdUsuario, IdProducto, Cantidad);
+                    resultado = 1;
                     return resultado;
                 }
             }
@@ -78,7 +80,8 @@ namespace Capa.AccesoDatos.AccesoDatosCarrito
             {
                 using (CarritoDataContext CarritoBD = new CarritoDataContext())
                 {
-                    resultado = CarritoBD.sp_EliminarCarritoPorCliente(IdUsuario);
+                    CarritoBD.sp_EliminarCarritoPorCliente(IdUsuario);
+                    resultado = 1;
                     return resultado;
                 }
             }

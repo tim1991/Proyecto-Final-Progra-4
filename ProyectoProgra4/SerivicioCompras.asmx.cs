@@ -6,6 +6,7 @@ using System.Web.Script.Services;
 using System.Web.Services;
 using Capa.Entidades;
 using Capa.LogicaNegocio.Carrito;
+using Capa.LogicaNegocio.Cliente;
 
 namespace ProyectoProgra4
 {
@@ -181,7 +182,99 @@ namespace ProyectoProgra4
         #endregion Carrito
 
         #region Usuarios
-        
+
+        /// <summary>
+        /// Obtiene la informacion del cliente
+        /// </summary>
+        /// <param name="IdCliente"></param>
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void ObtenerDatosCliente(int IdCliente)
+        {
+            try
+            {
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                Context.Response.Clear();
+                Context.Response.ContentType = "application/json";
+                ClienteLogica ClientesMetodos = new ClienteLogica();
+                List<Cliente> Respuesta = ClientesMetodos.ObtenerClientePorIdCliente(IdCliente);
+                Context.Response.Write(js.Serialize(Respuesta));
+
+            }
+            catch (Exception)
+            {
+                Context.Response.Write("Un error ha ocurrido por favor verifique los datos");
+            }
+        }
+
+        /// <summary>
+        /// Inserta los datos del cliente
+        /// </summary>
+        /// <param name="Nombre"></param>
+        /// <param name="Apellido"></param>
+        /// <param name="Email"></param>
+        /// <param name="Telefono"></param>
+        /// <param name="Direccion"></param>
+        /// <param name="Contrasena"></param>
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void InsertarDatosCliente(string Nombre, string Apellido, string Email, string Telefono, string Direccion, string Contrasena)
+        {
+            try
+            {
+                Cliente objCliente = new Cliente();
+
+                objCliente.Nombre = Nombre;
+                objCliente.Apellido = Apellido;
+                objCliente.Email = Email;
+                objCliente.Telefono = Telefono;
+                objCliente.Direccion = Direccion;
+                objCliente.Contrasena = Contrasena;
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                Context.Response.Clear();
+                Context.Response.ContentType = "application/json";
+                ClienteLogica ClientesMetodos = new ClienteLogica();
+                int Respuesta = ClientesMetodos.InsertarDatosCliente(objCliente);
+                Context.Response.Write(js.Serialize(Respuesta));
+
+            }
+            catch (Exception)
+            {
+                Context.Response.Write("Un error ha ocurrido por favor verifique los datos");
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void ActualizarDatosCliente(int IdCliente, string Nombre, string Apellido, string Email, string Telefono, string Direccion, string Contrasena)
+        {
+            try
+            {
+                Cliente objCliente = new Cliente();
+
+                objCliente.IdCliente = IdCliente;
+                objCliente.Nombre = Nombre;
+                objCliente.Apellido = Apellido;
+                objCliente.Email = Email;
+                objCliente.Telefono = Telefono;
+                objCliente.Direccion = Direccion;
+                objCliente.Contrasena = Contrasena;
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                Context.Response.Clear();
+                Context.Response.ContentType = "application/json";
+                ClienteLogica ClientesMetodos = new ClienteLogica();
+                int Respuesta = ClientesMetodos.InsertarDatosCliente(objCliente);
+                Context.Response.Write(js.Serialize(Respuesta));
+
+            }
+            catch (Exception)
+            {
+                Context.Response.Write("Un error ha ocurrido por favor verifique los datos");
+            }
+        }
         #endregion Usuarios
 
 
