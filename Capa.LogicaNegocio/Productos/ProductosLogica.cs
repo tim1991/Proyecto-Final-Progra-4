@@ -27,7 +27,7 @@ namespace Capa.LogicaNegocio.Productos
             {
                 GuardaErrores ErroresLog = new GuardaErrores();
                 string NombreMetodo = System.Reflection.MethodBase.GetCurrentMethod().Name;
-                ErroresLog.InsertarErrores(NombreMetodo, "AccesoDatosProducto", ex.Message, ex.StackTrace);
+                ErroresLog.InsertarErrores(NombreMetodo, "LogicaProducto", ex.Message, ex.StackTrace);
                 return null;
             }
         }
@@ -48,7 +48,7 @@ namespace Capa.LogicaNegocio.Productos
             {
                 GuardaErrores ErroresLog = new GuardaErrores();
                 string NombreMetodo = System.Reflection.MethodBase.GetCurrentMethod().Name;
-                ErroresLog.InsertarErrores(NombreMetodo, "AccesoDatosProducto", ex.Message, ex.StackTrace);
+                ErroresLog.InsertarErrores(NombreMetodo, "LogicaProducto", ex.Message, ex.StackTrace);
                 return null;
             }
         }

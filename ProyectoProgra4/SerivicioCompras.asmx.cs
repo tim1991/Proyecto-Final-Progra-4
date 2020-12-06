@@ -5,6 +5,7 @@ using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
 using Capa.Entidades;
+using Capa.LogicaNegocio.Carrito;
 
 namespace ProyectoProgra4
 {
@@ -21,19 +22,19 @@ namespace ProyectoProgra4
         #region Productos
 
         /// <summary>
-        /// Obtiene los datos del empleado
+        /// Obtiene los datos del producto por categoria
         /// </summary>
-        /// <param name="IdProducto"></param>
+        /// <param name="IdCategoria"></param>
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void ObtieneProductosXCategoria(int IdProducto)
+        public void ObtieneProductosXCategoria(int IdCategoria)
         {
             try
             {
                 JavaScriptSerializer JSSDatos = new JavaScriptSerializer();
                 ProductosLogica ObtieneProductos = new ProductosLogica();
                 string JSONRespuesta = String.Empty;
-                var Respuesta = ObtieneProductos.ObtieneProductosXCategoria(IdProducto);
+                var Respuesta = ObtieneProductos.ObtieneProductosXCategoria(IdCategoria);
                 JSONRespuesta = JSSDatos.Serialize(Respuesta);
                 Context.Response.Write(JSONRespuesta);
             }
@@ -44,7 +45,7 @@ namespace ProyectoProgra4
         }
 
         /// <summary>
-        /// Obtiene los datos del empleado
+        /// Obtiene los datos del producto
         /// </summary>
         /// <param name="IdProducto"></param>
         [WebMethod]
@@ -53,7 +54,7 @@ namespace ProyectoProgra4
         {
             try
             {
-               
+
                 JavaScriptSerializer js = new JavaScriptSerializer();
                 Context.Response.Clear();
                 Context.Response.ContentType = "application/json";
@@ -69,5 +70,120 @@ namespace ProyectoProgra4
         }
 
         #endregion Productos
+
+        #region Carrito
+
+        /// <summary>
+        /// Obtiene el carrito por cliente
+        /// </summary>
+        /// <param name="IdCliente"></param>
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void ObtenerCarritoPorCliente(int IdCliente)
+        {
+            try
+            {
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                Context.Response.Clear();
+                Context.Response.ContentType = "application/json";
+                CarritoLogica ObtieneCarrito = new CarritoLogica();
+                List<Carrito> Respuesta = ObtieneCarrito.ObtenerCarritoPorCliente(IdCliente);
+                Context.Response.Write(js.Serialize(Respuesta));
+
+            }
+            catch (Exception)
+            {
+                Context.Response.Write("Un error ha ocurrido por favor verifique los datos");
+            }
+        }
+
+
+        /// <summary>
+        /// Actualizar Carrito por cliente
+        /// </summary>
+        /// <param name="IdCliente"></param>
+        /// <param name="IdProducto"></param>
+        /// <param name="Cantidad"></param>
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void ActualizarCarritoPorCliente(int IdCliente, int IdProducto, int Cantidad)
+        {
+            try
+            {
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                Context.Response.Clear();
+                Context.Response.ContentType = "application/json";
+                CarritoLogica ObtieneCarrito = new CarritoLogica();
+                int Respuesta = ObtieneCarrito.ActualizarCarritoPorCliente(IdCliente, IdProducto, Cantidad);
+                Context.Response.Write(js.Serialize(Respuesta));
+
+            }
+            catch (Exception)
+            {
+                Context.Response.Write("Un error ha ocurrido por favor verifique los datos");
+            }
+        }
+
+        /// <summary>
+        /// Elimina el carrito por cliente
+        /// </summary>
+        /// <param name="IdCliente"></param>
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void EliminarCarritoPorCliente(int IdCliente)
+        {
+            try
+            {
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                Context.Response.Clear();
+                Context.Response.ContentType = "application/json";
+                CarritoLogica ObtieneCarrito = new CarritoLogica();
+                int Respuesta = ObtieneCarrito.EliminarCarritoPorCliente(IdCliente);
+                Context.Response.Write(js.Serialize(Respuesta));
+
+            }
+            catch (Exception)
+            {
+                Context.Response.Write("Un error ha ocurrido por favor verifique los datos");
+            }
+        }
+
+        /// <summary>
+        /// Inserta el carrito por cliente
+        /// </summary>
+        /// <param name="IdCliente"></param>
+        /// <param name="IdProducto"></param>
+        /// <param name="Cantidad"></param>
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void InsertarCarritoPorCliente(int IdCliente, int IdProducto, int Cantidad)
+        {
+            try
+            {
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                Context.Response.Clear();
+                Context.Response.ContentType = "application/json";
+                CarritoLogica ObtieneCarrito = new CarritoLogica();
+                int Respuesta = ObtieneCarrito.InsertarCarrito(IdCliente, IdProducto, Cantidad);
+                Context.Response.Write(js.Serialize(Respuesta));
+
+            }
+            catch (Exception)
+            {
+                Context.Response.Write("Un error ha ocurrido por favor verifique los datos");
+            }
+        }
+
+        #endregion Carrito
+
+        #region Usuarios
+        
+        #endregion Usuarios
+
+
     }
 }

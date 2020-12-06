@@ -96,6 +96,20 @@ namespace Capa.AccesoDatos.SQLLinqCarritoCompras
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idCliente, idProducto, cantidad);
 			return ((int)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_EliminarCarritoPorCliente")]
+		public int sp_EliminarCarritoPorCliente([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdCliente", DbType="Int")] System.Nullable<int> idCliente)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idCliente);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_ObtieneCarritoPorCliente")]
+		public ISingleResult<sp_ObtieneCarritoPorClienteResult> sp_ObtieneCarritoPorCliente([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdCliente", DbType="Int")] System.Nullable<int> idCliente)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idCliente);
+			return ((ISingleResult<sp_ObtieneCarritoPorClienteResult>)(result.ReturnValue));
+		}
 	}
 	
 	public partial class sp_ObtieneProductosPorCategoriaResult
@@ -325,6 +339,194 @@ namespace Capa.AccesoDatos.SQLLinqCarritoCompras
 				if ((this._IdCategoria != value))
 				{
 					this._IdCategoria = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_ObtieneCarritoPorClienteResult
+	{
+		
+		private int _IdCliente;
+		
+		private string _Nombre;
+		
+		private string _Apellido;
+		
+		private int _IdProducto;
+		
+		private string _NombreProducto;
+		
+		private string _ImagenProducto;
+		
+		private string _DescripcionProducto;
+		
+		private decimal _PrecioProducto;
+		
+		private int _IdCategoria;
+		
+		private System.Nullable<int> _Cantidad;
+		
+		public sp_ObtieneCarritoPorClienteResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdCliente", DbType="Int NOT NULL")]
+		public int IdCliente
+		{
+			get
+			{
+				return this._IdCliente;
+			}
+			set
+			{
+				if ((this._IdCliente != value))
+				{
+					this._IdCliente = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Nombre
+		{
+			get
+			{
+				return this._Nombre;
+			}
+			set
+			{
+				if ((this._Nombre != value))
+				{
+					this._Nombre = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Apellido", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Apellido
+		{
+			get
+			{
+				return this._Apellido;
+			}
+			set
+			{
+				if ((this._Apellido != value))
+				{
+					this._Apellido = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdProducto", DbType="Int NOT NULL")]
+		public int IdProducto
+		{
+			get
+			{
+				return this._IdProducto;
+			}
+			set
+			{
+				if ((this._IdProducto != value))
+				{
+					this._IdProducto = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreProducto", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string NombreProducto
+		{
+			get
+			{
+				return this._NombreProducto;
+			}
+			set
+			{
+				if ((this._NombreProducto != value))
+				{
+					this._NombreProducto = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ImagenProducto", DbType="VarChar(MAX)")]
+		public string ImagenProducto
+		{
+			get
+			{
+				return this._ImagenProducto;
+			}
+			set
+			{
+				if ((this._ImagenProducto != value))
+				{
+					this._ImagenProducto = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DescripcionProducto", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string DescripcionProducto
+		{
+			get
+			{
+				return this._DescripcionProducto;
+			}
+			set
+			{
+				if ((this._DescripcionProducto != value))
+				{
+					this._DescripcionProducto = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrecioProducto", DbType="Decimal(18,2) NOT NULL")]
+		public decimal PrecioProducto
+		{
+			get
+			{
+				return this._PrecioProducto;
+			}
+			set
+			{
+				if ((this._PrecioProducto != value))
+				{
+					this._PrecioProducto = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdCategoria", DbType="Int NOT NULL")]
+		public int IdCategoria
+		{
+			get
+			{
+				return this._IdCategoria;
+			}
+			set
+			{
+				if ((this._IdCategoria != value))
+				{
+					this._IdCategoria = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cantidad", DbType="Int")]
+		public System.Nullable<int> Cantidad
+		{
+			get
+			{
+				return this._Cantidad;
+			}
+			set
+			{
+				if ((this._Cantidad != value))
+				{
+					this._Cantidad = value;
 				}
 			}
 		}
