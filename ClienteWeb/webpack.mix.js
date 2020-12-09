@@ -18,9 +18,9 @@ mix.webpackConfig(webpack => {
             new CompressionPlugin({
                 test: /\.js(\?.*)?$/i,
             })
-            ,new TargetsPlugin({
-             browsers:['last 2 versions', 'chrome >=41','IE 10'],
-            })
+            //,new TargetsPlugin({
+             //browsers:['last 2 versions', 'chrome >=41','IE 10'],
+            //})
         ]
     };
 });

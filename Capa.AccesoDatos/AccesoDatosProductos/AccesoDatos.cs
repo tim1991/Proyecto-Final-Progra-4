@@ -10,7 +10,7 @@ namespace Capa.AccesoDatos
     public class AccesoDatos
     {
 
-        private List<Producto> listaProductos = new List<Producto>();
+        
 
         /// <summary>
         /// Obtiene la todos los productos por categoria
@@ -18,9 +18,11 @@ namespace Capa.AccesoDatos
         /// <returns></returns>
         public List<Producto> ObtenerProductos()
         {
+            List<Producto> listaProductos = new List<Producto>();
             try
             {
-                Producto objProducto = new Producto();
+               
+                
                 using (CarritoDataContext Carrito = new CarritoDataContext())
                 {
                     List<sp_ObtieneProductosResult> list = Carrito.sp_ObtieneProductos().ToList();
@@ -28,7 +30,7 @@ namespace Capa.AccesoDatos
 
                     foreach (var item in list)
                     {
-
+                        Producto objProducto = new Producto();
                         objProducto.IdProducto = item.IdProducto;
                         objProducto.NombreProducto = item.NombreProducto;
                         objProducto.PrecioProducto = item.PrecioProducto;
@@ -59,9 +61,10 @@ namespace Capa.AccesoDatos
         /// <returns></returns>
         public List<Producto> ObtenerProductosXCategoria(int IdCategoria)
         {
+            List<Producto> listaProductos = new List<Producto>();
             try
             {
-                Producto objProducto = new Producto();
+                
                 using (CarritoDataContext Carrito = new CarritoDataContext())
                 {
                     List<sp_ObtieneProductosPorCategoriaResult> list = Carrito.sp_ObtieneProductosPorCategoria(IdCategoria).ToList();
@@ -69,7 +72,7 @@ namespace Capa.AccesoDatos
 
                     foreach (var item in list)
                     {
-
+                        Producto objProducto = new Producto();
                         objProducto.IdProducto = item.IdProducto;
                         objProducto.NombreProducto = item.NombreProducto;
                         objProducto.PrecioProducto = item.PrecioProducto;

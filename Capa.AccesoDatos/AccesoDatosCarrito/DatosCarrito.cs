@@ -101,7 +101,7 @@ namespace Capa.AccesoDatos.AccesoDatosCarrito
         /// <returns></returns>
         public List<Carrito> ObtenerCarritoPorCliente(int IdUsuario)
         {
-            Carrito objCarrito = new Carrito();
+            
             List<Carrito> listaCarrito = new List<Carrito>();
             try
             {
@@ -110,9 +110,11 @@ namespace Capa.AccesoDatos.AccesoDatosCarrito
                 {
                     List<sp_ObtieneCarritoPorClienteResult> list = CarritoBD.sp_ObtieneCarritoPorCliente(IdUsuario).ToList();
 
-
+                    
                     foreach (var item in list)
                     {
+                        Carrito objCarrito = new Carrito();
+
                         objCarrito.IdUsuario = item.IdCliente;
                         objCarrito.NombreCliente = item.Nombre;
                         objCarrito.ApellidoCliente = item.Apellido;

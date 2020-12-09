@@ -80,6 +80,7 @@
         },
         methods: {
             login(e) {
+                debugger;
                 this.submitted = true;
                 // stop here if form is invalid
                 this.$v.$touch();
@@ -88,7 +89,9 @@
                 }
                 let self = this
                 this.$store.commit('loader', true)
+                localStorage.userId = 1;
 
+/*
                 axios.post(this.$baseUrl + 'auth_api/login/', {
                         email: this.encriptar(this.user.email, false),
                         pass: this.encriptar(this.user.password, false)
@@ -125,6 +128,8 @@
                         });
                         self.$store.commit('loader', false)
                     });
+
+                    */
 
             },
 
