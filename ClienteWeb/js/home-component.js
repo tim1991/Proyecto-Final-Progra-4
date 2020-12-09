@@ -104,6 +104,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -277,7 +283,11 @@ var render = function() {
                     },
                     [
                       _c("i", { staticClass: "fas fa-shopping-cart" }),
-                      _vm._v(" Carrito (" + _vm._s(_vm.itemsCarrito) + ")\n  ")
+                      _vm._v(
+                        " Carrito (" +
+                          _vm._s(_vm.itemsCarrito) +
+                          ")\n                            "
+                      )
                     ]
                   ),
                   _vm._v(" "),
@@ -308,7 +318,7 @@ var render = function() {
                           _vm._v(
                             " " +
                               _vm._s(item.NombreProducto) +
-                              " x " +
+                              " x\n                                    " +
                               _vm._s(item.Cantidad)
                           )
                         ]
@@ -506,7 +516,11 @@ var render = function() {
                             }
                           }
                         },
-                        [_vm._v("Agregar al carrito")]
+                        [
+                          _vm._v(
+                            "Agregar al\n                            carrito"
+                          )
+                        ]
                       )
                     ])
                   ]

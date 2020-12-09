@@ -10,14 +10,19 @@
                         <li><a href="#">Productos</a></li>
                         <li>
                             <div class="dropdown show">
-  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <i class="fas fa-shopping-cart"></i> Carrito ({{itemsCarrito}})
-  </a>
+                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
+                                    id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <i class="fas fa-shopping-cart"></i> Carrito ({{itemsCarrito}})
+                                </a>
 
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <a style="color: black;" v-for="(item,key) in carrito" :key="key" class="dropdown-item" href="#"><img class="card-img-top" style="width: 40px;" :src="item.ImagenProducto" alt="Card image cap"> {{item.NombreProducto}} x {{item.Cantidad}}</a>
-  </div>
-</div>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a style="color: black;" v-for="(item,key) in carrito" :key="key"
+                                        class="dropdown-item" href="#"><img class="card-img-top" style="width: 40px;"
+                                            :src="item.ImagenProducto" alt="Card image cap"> {{item.NombreProducto}} x
+                                        {{item.Cantidad}}</a>
+                                </div>
+                            </div>
                         </li>
                     </ul>
                 </nav>
@@ -81,7 +86,8 @@
                             <h5 class="card-title">{{producto.NombreProducto}} </h5>
                             <p class="card-text">{{producto.DescripcionProducto}}</p>
                             <p class="card-text">{{producto.PrecioProducto}}</p>
-                            <button class="btn btn-success btn-block" @click="addCart(producto.IdProducto)">Agregar al carrito</button>
+                            <button class="btn btn-success btn-block" @click="addCart(producto.IdProducto)">Agregar al
+                                carrito</button>
                         </div>
 
                     </div>
@@ -105,7 +111,7 @@
         data: function () {
             return {
                 carrito: [],
-                itemsCarrito:0,
+                itemsCarrito: 0,
                 productList: undefined,
                 user: {
                     email: '',
@@ -212,10 +218,10 @@
                     })
                     .then(function (res) {
 
-                       if(res.data){
-                           $.alert("Item agregado al carrito");
-                           self.obtenerCarrito()
-                       }
+                        if (res.data) {
+                            $.alert("Item agregado al carrito");
+                            self.obtenerCarrito()
+                        }
                     }).catch(function (err) {
                         console.log(err)
 
@@ -233,9 +239,9 @@
                     })
                     .then(function (res) {
 
-                       self.carrito = res.data
+                        self.carrito = res.data
 
-                       self.itemsCarrito = self.carrito.length 
+                        self.itemsCarrito = self.carrito.length
 
                     }).catch(function (err) {
                         console.log(err)
