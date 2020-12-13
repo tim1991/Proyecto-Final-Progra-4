@@ -52,5 +52,28 @@ namespace Capa.LogicaNegocio.Productos
                 return null;
             }
         }
+
+        /// <summary>
+        /// Obtiene y retorna la cantidad disponible de productos
+        /// </summary>
+        /// <param name="IdProducto"></param>
+        /// <returns></returns>
+        public int ObtieneCantidadSisponibleProductos(int IdProducto)
+        {
+            int CantidadDisponible = 0;
+            try
+            {
+                Capa.AccesoDatos.AccesoDatos Producto = new Capa.AccesoDatos.AccesoDatos();
+                CantidadDisponible = Producto.ObtieneCantidadProductos(IdProducto);
+                return CantidadDisponible;
+            }
+            catch (Exception ex)
+            {
+                GuardaErrores ErroresLog = new GuardaErrores();
+                string NombreMetodo = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErroresLog.InsertarErrores(NombreMetodo, "LogicaProducto", ex.Message, ex.StackTrace);
+                return CantidadDisponible;
+            }
+        }
     }
 }

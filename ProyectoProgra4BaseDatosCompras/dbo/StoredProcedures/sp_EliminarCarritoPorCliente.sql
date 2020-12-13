@@ -8,7 +8,7 @@ MODIFICATION
 USER                                DATE(MM/dd/YYYY)                        DESCRIPTION
 ********************************************************************************************/
 CREATE PROCEDURE [dbo].[sp_EliminarCarritoPorCliente]
-	@IdCliente INT
+	@IdCarrito INT
 AS
 
 BEGIN
@@ -18,7 +18,7 @@ BEGIN
 	BEGIN TRY
 
 		DELETE FROM dbo.Carrito
-		WHERE IdCliente = @IdCliente
+		WHERE IdCarrito = @IdCarrito
 
 	END TRY
 

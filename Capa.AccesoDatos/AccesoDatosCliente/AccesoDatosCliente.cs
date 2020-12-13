@@ -43,7 +43,7 @@ namespace Capa.AccesoDatos.AccesoDatosCliente
         }
         public List<Cliente> ObtenerDatosCliente(int IdCliente)
         {
-            Cliente objCarrito = new Cliente();
+
             List<Cliente> listaCarrito = new List<Cliente>();
             try
             {
@@ -54,6 +54,7 @@ namespace Capa.AccesoDatos.AccesoDatosCliente
 
                     foreach (var item in list)
                     {
+                        Cliente objCarrito = new Cliente();
                         objCarrito.IdCliente = item.IdCliente;
                         objCarrito.Nombre = item.Nombre;
                         objCarrito.Email = item.Email;

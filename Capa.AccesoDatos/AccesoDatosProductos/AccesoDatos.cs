@@ -10,8 +10,6 @@ namespace Capa.AccesoDatos
     public class AccesoDatos
     {
 
-        
-
         /// <summary>
         /// Obtiene la todos los productos por categoria
         /// </summary>
@@ -21,8 +19,6 @@ namespace Capa.AccesoDatos
             List<Producto> listaProductos = new List<Producto>();
             try
             {
-               
-                
                 using (CarritoDataContext Carrito = new CarritoDataContext())
                 {
                     List<sp_ObtieneProductosResult> list = Carrito.sp_ObtieneProductos().ToList();
@@ -32,6 +28,7 @@ namespace Capa.AccesoDatos
                     {
                         Producto objProducto = new Producto();
                         objProducto.IdProducto = item.IdProducto;
+                        objProducto.CantidadDisponible = item.CantidadDisponibles;
                         objProducto.NombreProducto = item.NombreProducto;
                         objProducto.PrecioProducto = item.PrecioProducto;
                         objProducto.DescripcionProducto = item.DescripcionProducto;
@@ -42,8 +39,6 @@ namespace Capa.AccesoDatos
                     }
                     return listaProductos;
                 }
-
-
             }
             catch (Exception ex)
             {
@@ -64,7 +59,7 @@ namespace Capa.AccesoDatos
             List<Producto> listaProductos = new List<Producto>();
             try
             {
-                
+
                 using (CarritoDataContext Carrito = new CarritoDataContext())
                 {
                     List<sp_ObtieneProductosPorCategoriaResult> list = Carrito.sp_ObtieneProductosPorCategoria(IdCategoria).ToList();
@@ -92,6 +87,37 @@ namespace Capa.AccesoDatos
                 string NombreMetodo = System.Reflection.MethodBase.GetCurrentMethod().Name;
                 ErroresLog.InsertarErrores(NombreMetodo, "AccesoDatosProducto", ex.Message, ex.StackTrace);
                 return listaProductos;
+            }
+        }
+
+
+        /// <summary>
+        /// Obtiene la cantidad de productos disponibles por Id
+        /// </summary>
+        /// <param name="IdProducto"></param>
+        /// <returns></returns>
+        public int ObtieneCantidadProductos(int IdProducto)
+        {
+            int CantidadDisponible = 0;
+            try
+            {
+                List<Producto> ProductoDisponible = new List<Producto>();
+
+                using (CarritoDataContext Carrito = new CarritoDataContext())
+                {
+                    List<sp_ObtieneCantidadProductosResult> list = Carrito.sp_ObtieneCantidadProductos(IdProducto).ToList();
+                    CantidadDisponible = list[0].CantidadDisponibles;
+                    return CantidadDisponible;
+                }
+
+                return CantidadDisponible;
+            }
+            catch (Exception ex)
+            {
+                GuardaErrores ErroresLog = new GuardaErrores();
+                string NombreMetodo = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErroresLog.InsertarErrores(NombreMetodo, "AccesoDatosProducto", ex.Message, ex.StackTrace);
+                return CantidadDisponible;
             }
         }
     }
