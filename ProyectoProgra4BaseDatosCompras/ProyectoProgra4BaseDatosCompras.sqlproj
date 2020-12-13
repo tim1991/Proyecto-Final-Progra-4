@@ -160,5 +160,9 @@
     <Build Include="dbo\StoredProcedures\sp_InsertarDatosCliente.sql" />
     <Build Include="dbo\StoredProcedures\sp_ActualizarDatosCliente.sql" />
     <Build Include="dbo\StoredProcedures\sp_ObtieneDatosClientePorCliente.sql" />
+    <Build Include="dbo\StoredProcedures\sp_ObtieneCantidadProductos.sql" />
+    <Build Include="dbo\StoredProcedures\sp_ObtieneMetodosPago.sql" />
+    <Build Include="dbo\StoredProcedures\sp_InsertarOrdenCliente.sql" />
+    <Build Include="dbo\StoredProcedures\sp_InsertarFacturaCliente.sql" />
   </ItemGroup>
 </Project>

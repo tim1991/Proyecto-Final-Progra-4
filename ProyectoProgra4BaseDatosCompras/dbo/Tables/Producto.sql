@@ -5,6 +5,7 @@
     [PrecioProducto]      DECIMAL (18, 2) NOT NULL,
     [ImagenProducto]      VARCHAR (MAX)   NULL,
     [IdCategoria]         INT             NOT NULL,
+	[CantidadDisponibles] INT			  NOT NULL,
     CONSTRAINT [PK_Producto] PRIMARY KEY CLUSTERED ([IdProducto] ASC),
     CONSTRAINT [FK_Producto_Categoria] FOREIGN KEY ([IdCategoria]) REFERENCES [dbo].[Categoria] ([IdCategoria])
 );

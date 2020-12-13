@@ -7,6 +7,7 @@ using System.Web.Services;
 using Capa.Entidades;
 using Capa.LogicaNegocio.Carrito;
 using Capa.LogicaNegocio.Cliente;
+using Capa.LogicaNegocio.Factura;
 
 namespace ProyectoProgra4
 {
@@ -103,12 +104,12 @@ namespace ProyectoProgra4
         /// <summary>
         /// Actualizar Carrito por cliente
         /// </summary>
-        /// <param name="IdCliente"></param>
+        /// <param name="IdCarrito"></param>
         /// <param name="IdProducto"></param>
         /// <param name="Cantidad"></param>
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void ActualizarCarritoPorCliente(int IdCliente, int IdProducto, int Cantidad)
+        public void ActualizarCarritoPorCliente(int IdCarrito, int IdProducto, int Cantidad)
         {
             try
             {
@@ -117,7 +118,7 @@ namespace ProyectoProgra4
                 Context.Response.Clear();
                 Context.Response.ContentType = "application/json";
                 CarritoLogica ObtieneCarrito = new CarritoLogica();
-                int Respuesta = ObtieneCarrito.ActualizarCarritoPorCliente(IdCliente, IdProducto, Cantidad);
+                int Respuesta = ObtieneCarrito.ActualizarCarritoPorCliente(IdCarrito, IdProducto, Cantidad);
                 Context.Response.Write(js.Serialize(Respuesta));
 
             }
@@ -130,10 +131,10 @@ namespace ProyectoProgra4
         /// <summary>
         /// Elimina el carrito por cliente
         /// </summary>
-        /// <param name="IdCliente"></param>
+        /// <param name="IdCarrito"></param>
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void EliminarCarritoPorCliente(int IdCliente)
+        public void EliminarCarritoPorCliente(int IdCarrito)
         {
             try
             {
@@ -142,7 +143,7 @@ namespace ProyectoProgra4
                 Context.Response.Clear();
                 Context.Response.ContentType = "application/json";
                 CarritoLogica ObtieneCarrito = new CarritoLogica();
-                int Respuesta = ObtieneCarrito.EliminarCarritoPorCliente(IdCliente);
+                int Respuesta = ObtieneCarrito.EliminarCarritoPorCliente(IdCarrito);
                 Context.Response.Write(js.Serialize(Respuesta));
 
             }
@@ -160,7 +161,7 @@ namespace ProyectoProgra4
         /// <param name="Cantidad"></param>
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void InsertarCarritoPorCliente(int IdCliente, int IdProducto, int Cantidad)
+        public void InsertarCarritoPorCliente(int IdCliente, int IdProducto, int Cantidad, int IdCarrito)
         {
             try
             {
@@ -169,7 +170,7 @@ namespace ProyectoProgra4
                 Context.Response.Clear();
                 Context.Response.ContentType = "application/json";
                 CarritoLogica ObtieneCarrito = new CarritoLogica();
-                int Respuesta = ObtieneCarrito.InsertarCarrito(IdCliente, IdProducto, Cantidad);
+                int Respuesta = ObtieneCarrito.InsertarCarrito(IdCliente, IdProducto, Cantidad, IdCarrito);
                 Context.Response.Write(js.Serialize(Respuesta));
 
             }
@@ -246,6 +247,16 @@ namespace ProyectoProgra4
             }
         }
 
+        /// <summary>
+        /// Actualiza los datos del cliente
+        /// </summary>
+        /// <param name="IdCliente"></param>
+        /// <param name="Nombre"></param>
+        /// <param name="Apellido"></param>
+        /// <param name="Email"></param>
+        /// <param name="Telefono"></param>
+        /// <param name="Direccion"></param>
+        /// <param name="Contrasena"></param>
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
         public void ActualizarDatosCliente(int IdCliente, string Nombre, string Apellido, string Email, string Telefono, string Direccion, string Contrasena)
@@ -277,6 +288,31 @@ namespace ProyectoProgra4
         }
         #endregion Usuarios
 
+        #region Factura
+
+        /// <summary>
+        /// Obtiene los metodos de pago
+        /// </summary>
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void ObtenerMetodoPago()
+        {
+            try
+            {
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                Context.Response.Clear();
+                Context.Response.ContentType = "application/json";
+                LogicaFactura ObtieneMetodosPago = new LogicaFactura();
+                List<MetodoPago> Respuesta = ObtieneMetodosPago.ObtenerMetodoPago();
+                Context.Response.Write(js.Serialize(Respuesta));
+            }
+            catch (Exception)
+            {
+                Context.Response.Write("Un error ha ocurrido por favor verifique los datos");
+            }
+        }
+
+        #endregion Factura
 
     }
 }

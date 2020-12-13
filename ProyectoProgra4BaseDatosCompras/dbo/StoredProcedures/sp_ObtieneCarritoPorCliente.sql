@@ -17,7 +17,8 @@ BEGIN
 
 	BEGIN TRY
 
-		SELECT CL.IdCliente,
+		SELECT CAR.IdCarrito,
+			   CL.IdCliente,
 			   CL.Nombre,
 			   CL.Apellido,
 			   PR.IdProducto,
@@ -26,7 +27,8 @@ BEGIN
 			   PR.DescripcionProducto,
 			   PR.PrecioProducto,
 			   PR.IdCategoria,
-			   CAR.Cantidad
+			   CAR.Cantidad,
+			   PR.CantidadDisponibles
 		FROM dbo.Carrito CAR      
 		INNER JOIN dbo.Clientes CL
 			ON CAR.IdCliente = CL.IdCliente
