@@ -110,12 +110,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       carrito: [],
+      useriD: 0,
+      userName: '',
       itemsCarrito: 0,
       productList: undefined,
       user: {
@@ -128,7 +133,13 @@ __webpack_require__.r(__webpack_exports__);
   mixins: [_mixins__WEBPACK_IMPORTED_MODULE_1__["misMixins"]],
   mounted: function mounted() {
     this.getProducts();
-    this.obtenerCarrito();
+    console.log(localStorage.userId);
+
+    if (localStorage.userId) {
+      this.useriD = localStorage.userId;
+      this.userName = localStorage.usuario;
+      this.obtenerCarrito();
+    }
   },
   validations: {
     user: {
@@ -138,7 +149,7 @@ __webpack_require__.r(__webpack_exports__);
       },
       password: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"],
-        minLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["minLength"])(6)
+        minLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["minLength"])(1)
       }
     }
   },
@@ -154,35 +165,33 @@ __webpack_require__.r(__webpack_exports__);
 
       var self = this;
       this.$store.commit('loader', true);
-      localStorage.userId = 1;
-      /*
-                      axios.post(this.$baseUrl + 'auth_api/login/', {
-                              email: this.encriptar(this.user.email, false),
-                              pass: this.encriptar(this.user.password, false)
-                          })
-                          .then(function (res) {
-                               var desencriptar = self.desencriptar(res.data.ciphertext)
-                               localStorage.provider = btoa('3747309182101sdhbfu')
-                              localStorage.realm = self.encriptar(desencriptar.empresa, false)
-                                 localStorage.AT = res.data.ciphertext;
-                              self.$store.commit('loader', false)
-                               if (res.data.empresa != 0 || res.data.activo != 0) {
-                                  self.$router.push('Dashboard')
-                              } else {
-                                  self.$router.push('Activar')
-                              }
-                                self.$store.commit('logotipo', res.data.folder + '/' + res.data.logotipo)
-                            }).catch(function (err) {
-                              console.log(err)
-                              self.$notify({
-                                  group: 'foo',
-                                  type: 'error',
-                                  title: 'Error!',
-                                  text: 'El usuario ingresado no existe, verifique sus datos'
-                              });
-                              self.$store.commit('loader', false)
-                          });
-                           */
+      axios.get('http://localhost:55466/SerivicioCompras.asmx/LoginCliente', {
+        params: {
+          Email: this.user.email,
+          Contrasena: this.user.password
+        }
+      }).then(function (res) {
+        console.log(res.data);
+
+        if (res.data.IdCliente != 0) {
+          localStorage.userId = res.data.IdCliente;
+          localStorage.usuario = res.data.Nombre + " " + res.data.Apellido;
+          self.useriD = localStorage.userId;
+          self.userName = localStorage.usuario;
+        }
+
+        localStorage.provider = btoa('3747309182101sdhbfu');
+        self.$store.commit('loader', false);
+      })["catch"](function (err) {
+        console.log(err);
+        self.$notify({
+          group: 'foo',
+          type: 'error',
+          title: 'Error!',
+          text: 'El usuario ingresado no existe, verifique sus datos'
+        });
+        self.$store.commit('loader', false);
+      });
     },
     getProducts: function getProducts() {
       var self = this;
@@ -335,134 +344,146 @@ var render = function() {
             _vm._m(2),
             _vm._v(" "),
             _c("div", { staticClass: "col-12 col-md-6" }, [
-              _c(
-                "form",
-                {
-                  staticClass: "login-form",
-                  on: {
-                    submit: function($event) {
-                      $event.preventDefault()
-                      return _vm.login($event)
-                    }
-                  }
-                },
-                [
-                  _c(
-                    "h2",
+              _vm.useriD == 0
+                ? _c(
+                    "form",
                     {
-                      staticStyle: {
-                        "text-align": "left",
-                        "text-transform": "uppercase"
+                      staticClass: "login-form",
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.login($event)
+                        }
                       }
                     },
-                    [_vm._v("Ingresar")]
-                  ),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v(
-                      "Ingrese los datos de su cuenta para ingresar al sistema."
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "label",
-                      {
-                        staticStyle: {
-                          "font-weight": "bold",
-                          "font-size": "16px"
-                        }
-                      },
-                      [_vm._v("Email")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "input-group mb-3" }, [
-                      _vm._m(3),
+                    [
+                      _c(
+                        "h2",
+                        {
+                          staticStyle: {
+                            "text-align": "left",
+                            "text-transform": "uppercase"
+                          }
+                        },
+                        [_vm._v("Ingresar")]
+                      ),
                       _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.user.email,
-                            expression: "user.email"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        class: {
-                          "is-invalid":
-                            _vm.submitted && _vm.$v.user.email.$error
-                        },
-                        attrs: {
-                          type: "email",
-                          placeholder: "Ingrese su email",
-                          name: "",
-                          id: "email"
-                        },
-                        domProps: { value: _vm.user.email },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.user, "email", $event.target.value)
-                          }
-                        }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "label",
-                      {
-                        staticStyle: {
-                          "font-weight": "bold",
-                          "font-size": "16px"
-                        }
-                      },
-                      [_vm._v("Contraseña")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "input-group mb-3" }, [
-                      _vm._m(4),
+                      _c("p", [
+                        _vm._v(
+                          "Ingrese los datos de su cuenta para ingresar al sistema."
+                        )
+                      ]),
                       _vm._v(" "),
-                      _c("input", {
-                        directives: [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c(
+                          "label",
                           {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.user.password,
-                            expression: "user.password"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        class: {
-                          "is-invalid":
-                            _vm.submitted && _vm.$v.user.password.$error
-                        },
-                        attrs: {
-                          type: "password",
-                          placeholder: "Ingrese su contraseña",
-                          name: "",
-                          id: "password"
-                        },
-                        domProps: { value: _vm.user.password },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
+                            staticStyle: {
+                              "font-weight": "bold",
+                              "font-size": "16px"
                             }
-                            _vm.$set(_vm.user, "password", $event.target.value)
-                          }
-                        }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(5)
-                ]
-              )
+                          },
+                          [_vm._v("Email")]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "input-group mb-3" }, [
+                          _vm._m(3),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.user.email,
+                                expression: "user.email"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid":
+                                _vm.submitted && _vm.$v.user.email.$error
+                            },
+                            attrs: {
+                              type: "email",
+                              placeholder: "Ingrese su email",
+                              name: "",
+                              id: "email"
+                            },
+                            domProps: { value: _vm.user.email },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(_vm.user, "email", $event.target.value)
+                              }
+                            }
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group" }, [
+                        _c(
+                          "label",
+                          {
+                            staticStyle: {
+                              "font-weight": "bold",
+                              "font-size": "16px"
+                            }
+                          },
+                          [_vm._v("Contraseña")]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "input-group mb-3" }, [
+                          _vm._m(4),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.user.password,
+                                expression: "user.password"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid":
+                                _vm.submitted && _vm.$v.user.password.$error
+                            },
+                            attrs: {
+                              type: "password",
+                              placeholder: "Ingrese su contraseña",
+                              name: "",
+                              id: "password"
+                            },
+                            domProps: { value: _vm.user.password },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.user,
+                                  "password",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(5)
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.useriD != 0
+                ? _c("div", { staticClass: "login-form p-3" }, [
+                    _c("h4", [_vm._v("Hola, " + _vm._s(_vm.userName))])
+                  ])
+                : _vm._e()
             ])
           ])
         ])

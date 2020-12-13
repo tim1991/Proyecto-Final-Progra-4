@@ -8,6 +8,40 @@ namespace Capa.LogicaNegocio.Cliente
 
     public class ClienteLogica
     {
+
+        public Entidades.Cliente Login(string email, string contrasena)
+        {
+            Entidades.Cliente cliente = new Entidades.Cliente();
+
+            return cliente;
+
+        }
+        /// <summary>
+        /// Reliza login de cliente
+        /// </summary>
+        /// <param name="Email"></param>
+        /// <param name="Contrasena"></param>
+        /// <returns>Entidades.Cliente</returns>
+
+        public Entidades.Cliente LoginCliente(string Email, string Contrasena)
+        {
+            try
+            {
+                Entidades.Cliente cliente = new Entidades.Cliente();
+                AccesoDatosCliente accionesCliente = new AccesoDatosCliente();
+                cliente = accionesCliente.Login(Email, Contrasena);
+                return cliente;
+            }
+            catch (Exception ex)
+            {
+                GuardaErrores ErroresLog = new GuardaErrores();
+                string NombreMetodo = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErroresLog.InsertarErrores(NombreMetodo, "LogicaDatosCarrito", ex.Message, ex.StackTrace);
+                return null;
+            }
+
+        }
+
         /// <summary>
         /// Obtiene los datos de los clientes
         /// </summary>

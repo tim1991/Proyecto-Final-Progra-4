@@ -35,7 +35,7 @@
 
                     </div>
                     <div class="col-12 col-md-6">
-                        <form class="login-form" @submit.prevent="login">
+                        <form v-if="useriD==0" class="login-form" @submit.prevent="login">
                             <h2 style="text-align:left; text-transform:uppercase;">Ingresar</h2>
                             <p>Ingrese los datos de su cuenta para ingresar al sistema.</p>
                             <div class="form-group">
@@ -67,6 +67,9 @@
                                 <button class="btn btn-gradient" type="submit">Ingresar</button>
                             </div>
                         </form>
+                        <div v-if="useriD!=0" class="login-form p-3">
+                            <h4>Hola, {{userName}}</h4>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -111,6 +114,8 @@
         data: function () {
             return {
                 carrito: [],
+                useriD: 0,
+                userName: '',
                 itemsCarrito: 0,
                 productList: undefined,
                 user: {
@@ -124,7 +129,12 @@
         mounted() {
 
             this.getProducts()
-            this.obtenerCarrito()
+            console.log(localStorage.userId);
+                if (localStorage.userId){
+                this.useriD = localStorage.userId;
+                this.userName = localStorage.usuario;
+                this.obtenerCarrito()
+            }
         },
         validations: {
             user: {
@@ -134,7 +144,7 @@
                 },
                 password: {
                     required,
-                    minLength: minLength(6)
+                    minLength: minLength(1)
                 }
             }
         },
@@ -149,46 +159,44 @@
                 }
                 let self = this
                 this.$store.commit('loader', true)
-                localStorage.userId = 1;
-                /*
-                                axios.post(this.$baseUrl + 'auth_api/login/', {
-                                        email: this.encriptar(this.user.email, false),
-                                        pass: this.encriptar(this.user.password, false)
-                                    })
-                                    .then(function (res) {
-
-                                        var desencriptar = self.desencriptar(res.data.ciphertext)
-
-                                        localStorage.provider = btoa('3747309182101sdhbfu')
-                                        localStorage.realm = self.encriptar(desencriptar.empresa, false)
 
 
+                axios.get('http://localhost:55466/SerivicioCompras.asmx/LoginCliente', {
+                        params: {
+                            Email: this.user.email,
+                            Contrasena: this.user.password
+                        }
 
-                                        localStorage.AT = res.data.ciphertext;
-                                        self.$store.commit('loader', false)
+                    })
+                    .then(function (res) {
+                        console.log(res.data);
+                        if (res.data.IdCliente != 0) {
+                            localStorage.userId = res.data.IdCliente;
+                            localStorage.usuario = res.data.Nombre + " " + res.data.Apellido;
 
-                                        if (res.data.empresa != 0 || res.data.activo != 0) {
-                                            self.$router.push('Dashboard')
-                                        } else {
-                                            self.$router.push('Activar')
-                                        }
+                            self.useriD = localStorage.userId
+                            self.userName = localStorage.usuario
+                        }
+
+                        localStorage.provider = btoa('3747309182101sdhbfu')
 
 
-                                        self.$store.commit('logotipo', res.data.folder + '/' + res.data.logotipo)
+                        self.$store.commit('loader', false)
 
 
-                                    }).catch(function (err) {
-                                        console.log(err)
-                                        self.$notify({
-                                            group: 'foo',
-                                            type: 'error',
-                                            title: 'Error!',
-                                            text: 'El usuario ingresado no existe, verifique sus datos'
-                                        });
-                                        self.$store.commit('loader', false)
-                                    });
 
-                                    */
+                    }).catch(function (err) {
+                        console.log(err)
+                        self.$notify({
+                            group: 'foo',
+                            type: 'error',
+                            title: 'Error!',
+                            text: 'El usuario ingresado no existe, verifique sus datos'
+                        });
+                        self.$store.commit('loader', false)
+                    });
+
+
 
             },
 

@@ -275,6 +275,27 @@ namespace ProyectoProgra4
                 Context.Response.Write("Un error ha ocurrido por favor verifique los datos");
             }
         }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void LoginCliente(string Email, string Contrasena)
+        {
+            try
+            {
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                Context.Response.Clear();
+                Context.Response.ContentType = "application/json";
+                ClienteLogica accionesCliente = new ClienteLogica();
+                Cliente Respuesta = accionesCliente.LoginCliente(Email, Contrasena);
+                Context.Response.Write(js.Serialize(Respuesta));
+
+            }
+            catch (Exception)
+            {
+                Context.Response.Write("Un error ha ocurrido por favor verifique los datos");
+            }
+        }
         #endregion Usuarios
 
 

@@ -14,6 +14,33 @@ namespace Capa.AccesoDatos.AccesoDatosCliente
         /// </summary>
         /// <param name="IdCliente"></param>
         /// <returns></returns>
+        ///
+        public Cliente Login(string Email, string Contrasena)
+        {
+            Cliente cliente = new Cliente();
+            try
+            {
+
+                using (CarritoDataContext CarritoBD = new CarritoDataContext())
+                {
+                    sp_LoginClienteResult result = CarritoBD.sp_LoginCliente(Email,Contrasena).FirstOrDefault();
+
+                    cliente.IdCliente = result.IdCliente;
+                    cliente.Nombre = result.Nombre;
+                    cliente.Apellido = result.Apellido;
+                    cliente.Email = result.Email;
+                    cliente.Telefono = result.Telefono;
+                    return cliente;
+                }
+            }
+            catch (Exception ex)
+            {
+                GuardaErrores ErroresLog = new GuardaErrores();
+                string NombreMetodo = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErroresLog.InsertarErrores(NombreMetodo, "DatosCliente", ex.Message, ex.StackTrace);
+                return cliente;
+            }
+        }
         public List<Cliente> ObtenerDatosCliente(int IdCliente)
         {
             Cliente objCarrito = new Cliente();
