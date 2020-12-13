@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Carrito\CarritoLogica.cs" />
     <Compile Include="Cliente\ClienteLogica.cs" />
+    <Compile Include="Factura\LogicaFactura.cs" />
     <Compile Include="Productos\ProductosLogica.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

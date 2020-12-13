@@ -1,35 +1,34 @@
 ﻿/*******************************************************************************************
--- AUTHOR: Arturo Romero Zamora
--- CREATE DATE: 11/29/2020
--- DESCRIPTION: Obtiene todos los productos
+-- AUTHOR: Diego Matarrita Pereira
+-- CREATE DATE: 12/11/2020
+-- DESCRIPTION: Inserta los datos de la orden del cliente
 ********************************************************************************************
 MODIFICATION
 ********************************************************************************************
 USER                                DATE(MM/dd/YYYY)                        DESCRIPTION
 ********************************************************************************************/
-CREATE PROCEDURE [dbo].[sp_ObtieneProductos]
+CREATE PROCEDURE [dbo].[sp_InsertarFacturaCliente]
+	@IdOrden	INT,
+	@IdProducto INT,
+	@Cantidad	INT,
+	@Precio		DECIMAL (18,2)
 AS
+
 BEGIN
 
 	SET NOCOUNT ON;
 
 	BEGIN TRY
 
-		SELECT PR.IdProducto,
-			   PR.NombreProducto,
-			   PR.DescripcionProducto,
-			   PR.PrecioProducto,
-			   PR.ImagenProducto,
-			   PR.IdCategoria,
-			   PR.CantidadDisponibles
-		FROM dbo.Producto PR
-
+		INSERT INTO dbo.Factura
+			(IdOrden, IdProducto, Cantidad, Precio, FechaFactura)
+		VALUES (@IdOrden,@IdProducto,@Cantidad, @Precio, GETDATE())
 
 	END TRY
 
 	BEGIN CATCH
 
-	THROW;
+		THROW;
 
 	END CATCH
 

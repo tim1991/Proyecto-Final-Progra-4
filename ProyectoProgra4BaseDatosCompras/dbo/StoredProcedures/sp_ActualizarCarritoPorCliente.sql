@@ -8,9 +8,9 @@ MODIFICATION
 USER                                DATE(MM/dd/YYYY)                        DESCRIPTION
 ********************************************************************************************/
 CREATE PROCEDURE [dbo].[sp_ActualizarCarritoPorCliente]
-	@IdCliente INT,
+	@IdCarrito	INT,
 	@IdProducto INT,
-	@Cantidad INT
+	@Cantidad	INT
 AS
 
 BEGIN
@@ -22,7 +22,7 @@ BEGIN
 		UPDATE dbo.Carrito
 			SET IdProducto = COALESCE(@IdProducto, IdProducto),
 				Cantidad =   COALESCE(@Cantidad, Cantidad)
-		WHERE IdCliente = @IdCliente
+		WHERE IdCarrito = @IdCarrito
 
 	END TRY
 

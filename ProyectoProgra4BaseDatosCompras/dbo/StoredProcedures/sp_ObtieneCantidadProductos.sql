@@ -1,13 +1,14 @@
 ﻿/*******************************************************************************************
 -- AUTHOR: Arturo Romero Zamora
--- CREATE DATE: 11/29/2020
--- DESCRIPTION: Obtiene todos los productos
+-- CREATE DATE: 12/10/2020
+-- DESCRIPTION: Obtiene la Cantidad  del producto
 ********************************************************************************************
 MODIFICATION
 ********************************************************************************************
 USER                                DATE(MM/dd/YYYY)                        DESCRIPTION
 ********************************************************************************************/
-CREATE PROCEDURE [dbo].[sp_ObtieneProductos]
+CREATE PROCEDURE [dbo].[sp_ObtieneCantidadProductos]
+	@IdProducto INT
 AS
 BEGIN
 
@@ -15,21 +16,15 @@ BEGIN
 
 	BEGIN TRY
 
-		SELECT PR.IdProducto,
-			   PR.NombreProducto,
-			   PR.DescripcionProducto,
-			   PR.PrecioProducto,
-			   PR.ImagenProducto,
-			   PR.IdCategoria,
-			   PR.CantidadDisponibles
+		SELECT PR.CantidadDisponibles
 		FROM dbo.Producto PR
-
+		WHERE PR.IdProducto = @IdProducto
 
 	END TRY
 
 	BEGIN CATCH
 
-	THROW;
+		THROW;
 
 	END CATCH
 
