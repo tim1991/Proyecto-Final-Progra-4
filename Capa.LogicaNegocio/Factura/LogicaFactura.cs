@@ -5,6 +5,13 @@ using System;
 using System.Collections.Generic;
 using Capa.AccesoDatos.AccesoDatosCarrito;
 using Capa.AccesoDatos.SQLLinqCarritoCompras;
+using System.Net.Mail;
+using System.Configuration;
+using System.Net.Configuration;
+using System.Net;
+using System.Security.Cryptography.X509Certificates;
+using System.Net.Security;
+using Capa.AccesoDatos.AccesoDatosCliente;
 
 namespace Capa.LogicaNegocio.Factura
 {
@@ -31,6 +38,12 @@ namespace Capa.LogicaNegocio.Factura
                 return objMetodoPago;
             }
         } 
+
+        /// <summary>
+        /// Obtiene las facturas del cliente
+        /// </summary>
+        /// <param name="IdCliente"></param>
+        /// <returns></returns>
         public List<sp_ObtieneFacturasClienteResult> ObtenerFacturasCliente(int IdCliente)
         {
             List<sp_ObtieneFacturasClienteResult> facturasLista = new List<sp_ObtieneFacturasClienteResult>();
@@ -49,6 +62,11 @@ namespace Capa.LogicaNegocio.Factura
             }
         }
 
+        /// <summary>
+        /// //Crea la factura
+        /// </summary>
+        /// <param name="IdCliente"></param>
+        /// <returns></returns>
         public Boolean CrearFactura(int IdCliente)
         {
             DatosCarrito CarritoDatos = new DatosCarrito();
@@ -59,6 +77,12 @@ namespace Capa.LogicaNegocio.Factura
             decimal total = calcularTotalFactura(objCarrito);
             int consecutivoFactura = accionesFactura.CrearFactura(IdCliente, total);
             bool insertarItemsFactura = accionesFactura.InsertarItemsFactura(objCarrito,consecutivoFactura);
+
+            List<Entidades.Cliente> objDatoosCliente = new List<Entidades.Cliente>();
+            AccesoDatosCliente ClienteDatos = new AccesoDatosCliente();
+            objDatoosCliente = ClienteDatos.ObtenerDatosCliente(IdCliente);
+
+            EnviaFactura(objDatoosCliente[0].Email);
 
             if (insertarItemsFactura)
             {
@@ -72,6 +96,11 @@ namespace Capa.LogicaNegocio.Factura
             
         }
 
+        /// <summary>
+        /// Calcula el total de la factura
+        /// </summary>
+        /// <param name="Carrito"></param>
+        /// <returns></returns>
         private decimal calcularTotalFactura(List<Capa.Entidades.Carrito> Carrito)
         {
             decimal total = 0;
@@ -80,6 +109,33 @@ namespace Capa.LogicaNegocio.Factura
                 total = (decimal) (total + (item.PrecioProducto * item.Cantidad));
             }
             return total;
+        }
+
+        public bool EnviaFactura(string correodestino)
+        {
+            try
+            {
+                MailMessage correo = new MailMessage();
+                correo.From = new MailAddress("comprasprogra4@gmail.com", "Comprasenlinea.com", System.Text.Encoding.UTF8);//Correo de salida
+                correo.To.Add(correodestino); //Correo destino?
+                correo.Subject = "Compra Realizada"; //Asunto
+                correo.Body = "Su compra se realizo exitosamente"; 
+                correo.IsBodyHtml = true;
+                correo.Priority = MailPriority.Normal;
+                SmtpClient smtp = new SmtpClient();
+                smtp.UseDefaultCredentials = false;
+                smtp.Host = "smtp.gmail.com"; //Host del servidor de correo
+                smtp.Port = 587; //Puerto de salida
+                smtp.Credentials = new System.Net.NetworkCredential("comprasprogra4@gmail.com", "ArturoPrograma4");//Cuenta de correo
+                ServicePointManager.ServerCertificateValidationCallback = delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
+                smtp.EnableSsl = true;//True si el servidor de correo permite ssl
+                smtp.Send(correo);
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
         }
     }
 }
