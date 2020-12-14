@@ -27,8 +27,9 @@ namespace Capa.AccesoDatos.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=sql5086.site4now.net;Initial Catalog=DB_A6B512_dmatarrita2;Persist Se" +
-            "curity Info=True;User ID=DB_A6B512_dmatarrita2_admin;Password=testprogra4ASP;Mul" +
-            "tipleActiveResultSets=True;Application Name=EntityFramework")]
+            "curity Info=True;User ID=DB_A6B512_dmatarrita2_admin;Password=testprogra4ASP;Poo" +
+            "ling=False;MultipleActiveResultSets=False;Connect Timeout=60;TrustServerCertific" +
+            "ate=False")]
         public string DB_A6B512_dmatarrita2ConnectionString {
             get {
                 return ((string)(this["DB_A6B512_dmatarrita2ConnectionString"]));

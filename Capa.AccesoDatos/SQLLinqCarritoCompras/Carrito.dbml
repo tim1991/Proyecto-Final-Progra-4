@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DB_A6B512_dmatarrita2" Class="CarritoDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=sql5086.site4now.net;Initial Catalog=DB_A6B512_dmatarrita2;Persist Security Info=True;User ID=DB_A6B512_dmatarrita2_admin;MultipleActiveResultSets=True;Application Name=EntityFramework" SettingsObjectName="Capa.AccesoDatos.Properties.Settings" SettingsPropertyName="DB_A6B512_dmatarrita2ConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=sql5086.site4now.net;Initial Catalog=DB_A6B512_dmatarrita2;Persist Security Info=True;User ID=DB_A6B512_dmatarrita2_admin;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;TrustServerCertificate=False" SettingsObjectName="Capa.AccesoDatos.Properties.Settings" SettingsPropertyName="DB_A6B512_dmatarrita2ConnectionString" Provider="System.Data.SqlClient" />
   <Function Name="dbo.sp_InsertarErrorLog" Method="sp_InsertarErrorLog">
     <Parameter Name="MetodoError" Parameter="metodoError" Type="System.String" DbType="VarChar(300)" />
     <Parameter Name="Clase" Parameter="clase" Type="System.String" DbType="VarChar(60)" />
@@ -10,16 +10,6 @@
   <Function Name="dbo.sp_ObtieneProductosPorCategoria" Method="sp_ObtieneProductosPorCategoria">
     <Parameter Name="IdCategoria" Parameter="idCategoria" Type="System.Int32" DbType="Int" />
     <ElementType Name="sp_ObtieneProductosPorCategoriaResult">
-      <Column Name="IdProducto" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="NombreProducto" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="DescripcionProducto" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="PrecioProducto" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
-      <Column Name="ImagenProducto" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="IdCategoria" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.sp_ObtieneProductos" Method="sp_ObtieneProductos">
-    <ElementType Name="sp_ObtieneProductosResult">
       <Column Name="IdProducto" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="NombreProducto" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="DescripcionProducto" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
@@ -103,6 +93,41 @@
       <Column Name="FechaCreacion" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
       <Column Name="FechaModificacion" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
       <Column Name="Contrasena" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_ObtieneProductoPorNombre" Method="sp_ObtieneProductoPorNombre">
+    <Parameter Name="Nombre" Parameter="nombre" Type="System.String" DbType="VarChar(100)" />
+    <ElementType Name="sp_ObtieneProductoPorNombreResult">
+      <Column Name="IdProducto" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NombreProducto" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="DescripcionProducto" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="PrecioProducto" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="ImagenProducto" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="IdCategoria" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CantidadDisponibles" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_ObtieneCantidadProductos" Method="sp_ObtieneCantidadProductos">
+    <Parameter Name="IdProducto" Parameter="idProducto" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_ObtieneCantidadProductosResult">
+      <Column Name="CantidadDisponibles" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_ObtieneMetodosPago" Method="sp_ObtieneMetodosPago">
+    <ElementType Name="sp_ObtieneMetodosPagoResult">
+      <Column Name="IdMetodoPago" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NombreMetodoPAgo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_ObtieneProductos" Method="sp_ObtieneProductos">
+    <ElementType Name="sp_ObtieneProductosResult">
+      <Column Name="IdProducto" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NombreProducto" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="DescripcionProducto" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="PrecioProducto" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="ImagenProducto" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="IdCategoria" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CantidadDisponibles" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
 </Database>
