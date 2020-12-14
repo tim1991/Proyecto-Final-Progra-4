@@ -3,6 +3,7 @@ using Capa.Entidades.EnumResultados;
 using Capa.Utilidades.GuardaErrores;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Capa.LogicaNegocio.Carrito
 {
@@ -28,18 +29,36 @@ namespace Capa.LogicaNegocio.Carrito
 
                 int CantidadDisponible = Producto.ObtieneCantidadProductos(IdProducto);
 
+
+                var item = objCarrito.FirstOrDefault(i => i.IdProducto == IdProducto);
+
                 if (CantidadDisponible > Cantidad)
                 {
-                    if (objCarrito[0].IdProducto == IdProducto)
+                    if (objCarrito.Count != 0)
                     {
-                        CarritoDatos.ActualizarCarritoPorCliente(IdCarrito, IdProducto, Cantidad);
-                        ResultadoOperacion = (int)EnumResultadoOperacion.Exito;
+                        if (item == null)
+                        {
+                            if (item.IdProducto == IdProducto)
+                            {
+                                int nuevaCantidad = (int)(item.Cantidad + Cantidad);
+                                CarritoDatos.ActualizarCarritoPorCliente(item.IdCarrito, IdProducto, nuevaCantidad);
+                                ResultadoOperacion = (int)EnumResultadoOperacion.Exito;
+                            }
+                            else
+                            {
+                                ResultadoOperacion = CarritoDatos.InsertarCarritoPorCliente(IdUsuario, IdProducto, Cantidad);
+                                ResultadoOperacion = (int)EnumResultadoOperacion.Exito;
+                            }
+
+                        }
+                        
                     }
                     else
                     {
                         ResultadoOperacion = CarritoDatos.InsertarCarritoPorCliente(IdUsuario, IdProducto, Cantidad);
                         ResultadoOperacion = (int)EnumResultadoOperacion.Exito;
                     }
+                    
                 }
                 else
                 {

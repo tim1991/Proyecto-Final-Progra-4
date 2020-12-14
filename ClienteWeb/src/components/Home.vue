@@ -156,6 +156,7 @@
                 this.useriD = localStorage.userId;
                 this.userName = localStorage.usuario;
                 this.obtenerCarrito()
+                ObtenerCarritoPorCliente
             }
         },
         validations: {
@@ -183,7 +184,7 @@
                 this.$store.commit('loader', true)
 
 
-                axios.get('http://localhost:55466/SerivicioCompras.asmx/LoginCliente', {
+                axios.get(this.$baseUrl + 'LoginCliente', {
                         params: {
                             Email: this.user.email,
                             Contrasena: this.user.password
@@ -225,7 +226,7 @@
             getProducts: function () {
 
                 let self = this
-                axios.post('http://localhost:55466/SerivicioCompras.asmx/ObtieneProductos')
+                axios.post(this.$baseUrl + 'ObtieneProductos')
                     .then(function (res) {
 
                         self.productList = res.data
@@ -235,15 +236,35 @@
                     });
 
             },
+
+            ObtenerCarritoPorCliente: function () {
+                axios.get(this.$baseUrl + 'ObtenerCarritoPorCliente', {
+                        params: {
+                            IdCliente: localStorage.userId,
+                        }
+
+                    })
+                    .then(function (res) {
+
+                        if (res.data) {
+                            $.alert("Item agregado al carrito");
+                            self.obtenerCarrito()
+                        }
+                    }).catch(function (err) {
+                        console.log(err)
+
+                    });
+            },
             addCart: function (id) {
 
                 let self = this
                 if (this.useriD != 0) {
-                    axios.get('http://localhost:55466/SerivicioCompras.asmx/InsertarCarritoPorCliente', {
+                    axios.get(this.$baseUrl + 'InsertarCarritoPorCliente', {
                             params: {
                                 IdCliente: localStorage.userId,
                                 IdProducto: id,
-                                Cantidad: 1
+                                Cantidad: 1,
+                                IdCarrito:1
                             }
 
                         })
@@ -267,7 +288,7 @@
             obtenerCarrito: function (id) {
 
                 let self = this
-                axios.get('http://localhost:55466/SerivicioCompras.asmx/ObtenerCarritoPorCliente', {
+                axios.get(this.$baseUrl + 'ObtenerCarritoPorCliente', {
                         params: {
                             IdCliente: localStorage.userId
                         }

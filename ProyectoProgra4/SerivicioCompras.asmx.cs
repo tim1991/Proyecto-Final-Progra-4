@@ -161,7 +161,7 @@ namespace ProyectoProgra4
         /// <param name="Cantidad"></param>
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void InsertarCarritoPorCliente(int IdCliente, int IdProducto, int Cantidad, int IdCarrito)
+        public void InsertarCarritoPorCliente(int IdCliente, int IdProducto, int Cantidad, int IdCarrito =0)
         {
             try
             {

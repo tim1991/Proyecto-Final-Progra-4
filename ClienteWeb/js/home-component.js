@@ -161,6 +161,7 @@ __webpack_require__.r(__webpack_exports__);
       this.useriD = localStorage.userId;
       this.userName = localStorage.usuario;
       this.obtenerCarrito();
+      ObtenerCarritoPorCliente;
     }
   },
   validations: {
@@ -187,7 +188,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var self = this;
       this.$store.commit('loader', true);
-      axios.get('http://localhost:55466/SerivicioCompras.asmx/LoginCliente', {
+      axios.get(this.$baseUrl + 'LoginCliente', {
         params: {
           Email: this.user.email,
           Contrasena: this.user.password
@@ -218,8 +219,22 @@ __webpack_require__.r(__webpack_exports__);
     },
     getProducts: function getProducts() {
       var self = this;
-      axios.post('http://localhost:55466/SerivicioCompras.asmx/ObtieneProductos').then(function (res) {
+      axios.post(this.$baseUrl + 'ObtieneProductos').then(function (res) {
         self.productList = res.data;
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    ObtenerCarritoPorCliente: function ObtenerCarritoPorCliente() {
+      axios.get(this.$baseUrl + 'ObtenerCarritoPorCliente', {
+        params: {
+          IdCliente: localStorage.userId
+        }
+      }).then(function (res) {
+        if (res.data) {
+          $.alert("Item agregado al carrito");
+          self.obtenerCarrito();
+        }
       })["catch"](function (err) {
         console.log(err);
       });
@@ -228,11 +243,12 @@ __webpack_require__.r(__webpack_exports__);
       var self = this;
 
       if (this.useriD != 0) {
-        axios.get('http://localhost:55466/SerivicioCompras.asmx/InsertarCarritoPorCliente', {
+        axios.get(this.$baseUrl + 'InsertarCarritoPorCliente', {
           params: {
             IdCliente: localStorage.userId,
             IdProducto: id,
-            Cantidad: 1
+            Cantidad: 1,
+            IdCarrito: 1
           }
         }).then(function (res) {
           if (res.data) {
@@ -248,7 +264,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     obtenerCarrito: function obtenerCarrito(id) {
       var self = this;
-      axios.get('http://localhost:55466/SerivicioCompras.asmx/ObtenerCarritoPorCliente', {
+      axios.get(this.$baseUrl + 'ObtenerCarritoPorCliente', {
         params: {
           IdCliente: localStorage.userId
         }
