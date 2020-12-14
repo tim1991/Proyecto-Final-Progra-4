@@ -27,7 +27,7 @@
                                         <img class="card-img-top" style="width: 40px;"
                                             :src="item.ImagenProducto" alt="Card image cap">  {{item.NombreProducto}} x
                                         {{item.Cantidad}}</div>
-                                        <button class="btn btn-success">Procesar carrito</button>
+                                        <button @click="crearFactura()" class="btn btn-success">Procesar carrito</button>
                                 </div>
                             </div>
                         </li>
@@ -52,7 +52,7 @@
                 </div>
 
 
-                <div v-for="(producto,key) in productList" :key="key" class="col-12 col-md-6 mt-3">
+                <div v-for="(producto,key) in productList" :key="key" class="col-12 col-md-4 mt-3">
                     <div class="card" style="width: 18rem;">
                         <img class="card-img-top" :src="producto.ImagenProducto" alt="Card image cap">
                         <div class="card-body">
@@ -250,6 +250,26 @@
 
                         if (res.data) {
                             $.alert("Item agregado al carrito");
+                            self.obtenerCarrito()
+                        }
+                    }).catch(function (err) {
+                        console.log(err)
+
+                    });
+            },
+            crearFactura: function () {
+
+                let self = this;
+                axios.get(this.$baseUrl + 'crearFactura', {
+                        params: {
+                            IdCliente: localStorage.userId,
+                        }
+
+                    })
+                    .then(function (res) {
+
+                        if (res.data) {
+                            $.alert("Factura procesada correctamente");
                             self.obtenerCarrito()
                         }
                     }).catch(function (err) {

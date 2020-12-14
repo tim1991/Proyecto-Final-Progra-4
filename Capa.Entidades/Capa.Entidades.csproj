@@ -45,6 +45,7 @@
     <Compile Include="Cliente.cs" />
     <Compile Include="EnumResultados\EnumResultadoOperacion.cs" />
     <Compile Include="Factura.cs" />
+    <Compile Include="ItemsFactura.cs" />
     <Compile Include="MetodoPago.cs" />
     <Compile Include="Orden.cs" />
     <Compile Include="Producto.cs" />

@@ -241,6 +241,21 @@ __webpack_require__.r(__webpack_exports__);
         console.log(err);
       });
     },
+    crearFactura: function crearFactura() {
+      var self = this;
+      axios.get(this.$baseUrl + 'crearFactura', {
+        params: {
+          IdCliente: localStorage.userId
+        }
+      }).then(function (res) {
+        if (res.data) {
+          $.alert("Factura procesada correctamente");
+          self.obtenerCarrito();
+        }
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
     deleteCart: function deleteCart(id) {
       debugger;
       var self = this;
@@ -434,9 +449,18 @@ var render = function() {
                         )
                       }),
                       _vm._v(" "),
-                      _c("button", { staticClass: "btn btn-success" }, [
-                        _vm._v("Procesar carrito")
-                      ])
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success",
+                          on: {
+                            click: function($event) {
+                              return _vm.crearFactura()
+                            }
+                          }
+                        },
+                        [_vm._v("Procesar carrito")]
+                      )
                     ],
                     2
                   )
@@ -460,7 +484,7 @@ var render = function() {
           _vm._l(_vm.productList, function(producto, key) {
             return _c(
               "div",
-              { key: key, staticClass: "col-12 col-md-6 mt-3" },
+              { key: key, staticClass: "col-12 col-md-4 mt-3" },
               [
                 _c(
                   "div",

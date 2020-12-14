@@ -3,6 +3,7 @@ using Capa.Entidades;
 using Capa.Utilidades.GuardaErrores;
 using System;
 using System.Collections.Generic;
+using Capa.AccesoDatos.AccesoDatosCarrito;
 
 namespace Capa.LogicaNegocio.Factura
 {
@@ -28,6 +29,39 @@ namespace Capa.LogicaNegocio.Factura
                 ErroresLog.InsertarErrores(NombreMetodo, "LogicaFactura", ex.Message, ex.StackTrace);
                 return objMetodoPago;
             }
+        }
+
+        public Boolean CrearFactura(int IdCliente)
+        {
+            DatosCarrito CarritoDatos = new DatosCarrito();
+            List<Capa.Entidades.Carrito> objCarrito = new List<Capa.Entidades.Carrito>();
+            objCarrito = CarritoDatos.ObtenerCarritoPorCliente(IdCliente);
+            AccesoDatosFactura accionesFactura = new AccesoDatosFactura();
+
+            decimal total = calcularTotalFactura(objCarrito);
+            int consecutivoFactura = accionesFactura.CrearFactura(IdCliente, total);
+            bool insertarItemsFactura = accionesFactura.InsertarItemsFactura(objCarrito,consecutivoFactura);
+
+            if (insertarItemsFactura)
+            {
+                accionesFactura.VaciarCarrito(IdCliente);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
+        }
+
+        private decimal calcularTotalFactura(List<Capa.Entidades.Carrito> Carrito)
+        {
+            decimal total = 0;
+            foreach (var item in Carrito)
+            {
+                total = (decimal) (total + (item.PrecioProducto * item.Cantidad));
+            }
+            return total;
         }
     }
 }
