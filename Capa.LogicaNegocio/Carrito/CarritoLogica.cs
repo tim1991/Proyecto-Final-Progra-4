@@ -36,7 +36,7 @@ namespace Capa.LogicaNegocio.Carrito
                 {
                     if (objCarrito.Count != 0)
                     {
-                        if (item == null)
+                        if (item != null)
                         {
                             if (item.IdProducto == IdProducto)
                             {
@@ -44,14 +44,15 @@ namespace Capa.LogicaNegocio.Carrito
                                 CarritoDatos.ActualizarCarritoPorCliente(item.IdCarrito, IdProducto, nuevaCantidad);
                                 ResultadoOperacion = (int)EnumResultadoOperacion.Exito;
                             }
-                            else
-                            {
-                                ResultadoOperacion = CarritoDatos.InsertarCarritoPorCliente(IdUsuario, IdProducto, Cantidad);
-                                ResultadoOperacion = (int)EnumResultadoOperacion.Exito;
-                            }
+                            
 
                         }
-                        
+                        else
+                        {
+                            ResultadoOperacion = CarritoDatos.InsertarCarritoPorCliente(IdUsuario, IdProducto, Cantidad);
+                            ResultadoOperacion = (int)EnumResultadoOperacion.Exito;
+                        }
+
                     }
                     else
                     {
