@@ -75,5 +75,27 @@ namespace Capa.LogicaNegocio.Productos
                 return CantidadDisponible;
             }
         }
+
+        /// <summary>
+        /// Obtiene los productos por nombre
+        /// </summary>
+        /// <param name="Nombre"></param>
+        /// <returns></returns>
+        public List<Producto> ObtieneProductosXNombre(string Nombre)
+        {
+            try
+            {
+                Capa.AccesoDatos.AccesoDatos Producto = new Capa.AccesoDatos.AccesoDatos();
+                objProduc = Producto.ObtenerProductosXNombre(Nombre);
+                return objProduc;
+            }
+            catch (Exception ex)
+            {
+                GuardaErrores ErroresLog = new GuardaErrores();
+                string NombreMetodo = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErroresLog.InsertarErrores(NombreMetodo, "LogicaProducto", ex.Message, ex.StackTrace);
+                return null;
+            }
+        }
     }
 }
