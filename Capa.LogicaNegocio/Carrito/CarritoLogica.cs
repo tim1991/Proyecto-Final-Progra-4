@@ -29,7 +29,7 @@ namespace Capa.LogicaNegocio.Carrito
 
                 int CantidadDisponible = Producto.ObtieneCantidadProductos(IdProducto);
 
-
+                //Filtramos la consulta oir id de prodcuto asi obtenemos el producto que deseamos aumentar de cantidad
                 var item = objCarrito.FirstOrDefault(i => i.IdProducto == IdProducto);
 
                 if (CantidadDisponible > Cantidad)
@@ -44,7 +44,6 @@ namespace Capa.LogicaNegocio.Carrito
                                 CarritoDatos.ActualizarCarritoPorCliente(item.IdCarrito, IdProducto, nuevaCantidad);
                                 ResultadoOperacion = (int)EnumResultadoOperacion.Exito;
                             }
-                            
 
                         }
                         else
@@ -52,7 +51,6 @@ namespace Capa.LogicaNegocio.Carrito
                             ResultadoOperacion = CarritoDatos.InsertarCarritoPorCliente(IdUsuario, IdProducto, Cantidad);
                             ResultadoOperacion = (int)EnumResultadoOperacion.Exito;
                         }
-
                     }
                     else
                     {
