@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
+using Capa.AccesoDatos.SQLLinqCarritoCompras;
 using Capa.Entidades;
 using Capa.LogicaNegocio.Carrito;
 using Capa.LogicaNegocio.Cliente;
@@ -345,6 +346,25 @@ namespace ProyectoProgra4
                 Context.Response.ContentType = "application/json";
                 LogicaFactura accionesFactura = new LogicaFactura();
                 bool Respuesta = accionesFactura.CrearFactura(IdCliente);
+                Context.Response.Write(js.Serialize(Respuesta));
+
+            }
+            catch (Exception)
+            {
+                Context.Response.Write("Un error ha ocurrido por favor verifique los datos");
+            }
+        }  [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void ObtenerFacturasCliente(int IdCliente)
+        {
+            try
+            {
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                Context.Response.Clear();
+                Context.Response.ContentType = "application/json";
+                LogicaFactura accionesFactura = new LogicaFactura();
+                List<sp_ObtieneFacturasClienteResult> Respuesta = accionesFactura.ObtenerFacturasCliente(IdCliente);
                 Context.Response.Write(js.Serialize(Respuesta));
 
             }

@@ -167,11 +167,39 @@ namespace Capa.AccesoDatos.SQLLinqCarritoCompras
 			return ((ISingleResult<sp_ObtieneCantidadProductosResult>)(result.ReturnValue));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_EliminarCarritoPorCliente")]
+		public int sp_EliminarCarritoPorCliente1([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdCarrito", DbType="Int")] System.Nullable<int> idCarrito)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idCarrito);
+			return ((int)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_ObtieneCarritoPorCliente")]
 		public ISingleResult<sp_ObtieneCarritoPorClienteResult> sp_ObtieneCarritoPorCliente([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdCliente", DbType="Int")] System.Nullable<int> idCliente)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idCliente);
 			return ((ISingleResult<sp_ObtieneCarritoPorClienteResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_ObtieneFacturaId")]
+		public ISingleResult<sp_ObtieneFacturaIdResult> sp_ObtieneFacturaId([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdFactura", DbType="Int")] System.Nullable<int> idFactura)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idFactura);
+			return ((ISingleResult<sp_ObtieneFacturaIdResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_ObtieneItemsFacturaId")]
+		public ISingleResult<sp_ObtieneItemsFacturaIdResult> sp_ObtieneItemsFacturaId([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdFactura", DbType="Int")] System.Nullable<int> idFactura)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idFactura);
+			return ((ISingleResult<sp_ObtieneItemsFacturaIdResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_ObtieneFacturasCliente")]
+		public ISingleResult<sp_ObtieneFacturasClienteResult> sp_ObtieneFacturasCliente([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdCliente", DbType="Int")] System.Nullable<int> idCliente)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idCliente);
+			return ((ISingleResult<sp_ObtieneFacturasClienteResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -982,6 +1010,228 @@ namespace Capa.AccesoDatos.SQLLinqCarritoCompras
 				if ((this._CantidadDisponibles != value))
 				{
 					this._CantidadDisponibles = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_ObtieneFacturaIdResult
+	{
+		
+		private int _IdFactura;
+		
+		private System.Nullable<int> _IdCliente;
+		
+		private System.Nullable<System.DateTime> _FechaFactura;
+		
+		private System.Nullable<decimal> _Total;
+		
+		public sp_ObtieneFacturaIdResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdFactura", DbType="Int NOT NULL")]
+		public int IdFactura
+		{
+			get
+			{
+				return this._IdFactura;
+			}
+			set
+			{
+				if ((this._IdFactura != value))
+				{
+					this._IdFactura = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdCliente", DbType="Int")]
+		public System.Nullable<int> IdCliente
+		{
+			get
+			{
+				return this._IdCliente;
+			}
+			set
+			{
+				if ((this._IdCliente != value))
+				{
+					this._IdCliente = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaFactura", DbType="DateTime")]
+		public System.Nullable<System.DateTime> FechaFactura
+		{
+			get
+			{
+				return this._FechaFactura;
+			}
+			set
+			{
+				if ((this._FechaFactura != value))
+				{
+					this._FechaFactura = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Total", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> Total
+		{
+			get
+			{
+				return this._Total;
+			}
+			set
+			{
+				if ((this._Total != value))
+				{
+					this._Total = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_ObtieneItemsFacturaIdResult
+	{
+		
+		private string _NombreProducto;
+		
+		private System.Nullable<int> _Cantidad;
+		
+		private System.Nullable<decimal> _SubTotal;
+		
+		public sp_ObtieneItemsFacturaIdResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreProducto", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string NombreProducto
+		{
+			get
+			{
+				return this._NombreProducto;
+			}
+			set
+			{
+				if ((this._NombreProducto != value))
+				{
+					this._NombreProducto = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cantidad", DbType="Int")]
+		public System.Nullable<int> Cantidad
+		{
+			get
+			{
+				return this._Cantidad;
+			}
+			set
+			{
+				if ((this._Cantidad != value))
+				{
+					this._Cantidad = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubTotal", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> SubTotal
+		{
+			get
+			{
+				return this._SubTotal;
+			}
+			set
+			{
+				if ((this._SubTotal != value))
+				{
+					this._SubTotal = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_ObtieneFacturasClienteResult
+	{
+		
+		private System.Nullable<int> _IdCliente;
+		
+		private int _IdFactura;
+		
+		private string _Fecha;
+		
+		private System.Nullable<decimal> _Total;
+		
+		public sp_ObtieneFacturasClienteResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdCliente", DbType="Int")]
+		public System.Nullable<int> IdCliente
+		{
+			get
+			{
+				return this._IdCliente;
+			}
+			set
+			{
+				if ((this._IdCliente != value))
+				{
+					this._IdCliente = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdFactura", DbType="Int NOT NULL")]
+		public int IdFactura
+		{
+			get
+			{
+				return this._IdFactura;
+			}
+			set
+			{
+				if ((this._IdFactura != value))
+				{
+					this._IdFactura = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fecha", DbType="VarChar(30)")]
+		public string Fecha
+		{
+			get
+			{
+				return this._Fecha;
+			}
+			set
+			{
+				if ((this._Fecha != value))
+				{
+					this._Fecha = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Total", DbType="Decimal(18,2)")]
+		public System.Nullable<decimal> Total
+		{
+			get
+			{
+				return this._Total;
+			}
+			set
+			{
+				if ((this._Total != value))
+				{
+					this._Total = value;
 				}
 			}
 		}

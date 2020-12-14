@@ -73,7 +73,7 @@ namespace Capa.AccesoDatos.AccesoDatosCarrito
         /// </summary>
         /// <param name="IDCarrito"></param>
         /// <returns></returns>
-        public int EliminarCarritoPorCliente(int IDCarrito)
+        public int EliminarCarritoPorCliente(int IdCarrito)
         {
 
             int resultado = 0;
@@ -81,7 +81,7 @@ namespace Capa.AccesoDatos.AccesoDatosCarrito
             {
                 using (CarritoDataContext CarritoBD = new CarritoDataContext())
                 {
-                    CarritoBD.sp_EliminarCarritoPorCliente(IDCarrito);
+                    CarritoBD.sp_EliminarCarritoPorCliente(IdCarrito);
                     resultado = (int)EnumResultadoOperacion.Exito;
                     return resultado;
                 }

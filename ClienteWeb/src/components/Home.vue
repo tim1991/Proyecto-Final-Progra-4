@@ -8,7 +8,19 @@
                         <li><a href="#">Inicio</a></li>
                         <li><a href="#">Productos</a></li>
                         <li v-if="useriD!=0">
-                            <a>Hola, {{userName}}</a>
+
+                            <div class="dropdown show">
+                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
+                                    id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    Hola, {{userName}}
+                                </a>
+
+                                <div class="dropdown-menu" style="min-width: 200px;" aria-labelledby="dropdownMenuLink">
+                                    <a @click="obtenerFacturasCliente()" data-toggle="modal" data-target="#facturasModal" style="color:black;" class="dropdown-item">Ver mis pedidos</a>
+                                </div>
+                            </div>
+
                         </li>
 
                         <li v-if="useriD==0"><a data-toggle="modal" data-target="#loginModal">Ingresar</a></li>
@@ -23,11 +35,12 @@
                                 <div class="dropdown-menu" style="min-width: 200px;" aria-labelledby="dropdownMenuLink">
                                     <div style="color: black;" v-for="(item,key) in carrito" :key="key"
                                         class="dropdown-item">
-                                        <a style="color:red" @click="deleteCart(item.IdCarrito)"> <i class="fas fa-trash"></i></a>
-                                        <img class="card-img-top" style="width: 40px;"
-                                            :src="item.ImagenProducto" alt="Card image cap">  {{item.NombreProducto}} x
+                                        <a style="color:red" @click="deleteCart(item.IdCarrito)"> <i
+                                                class="fas fa-trash"></i></a>
+                                        <img class="card-img-top" style="width: 40px;" :src="item.ImagenProducto"
+                                            alt="Card image cap"> {{item.NombreProducto}} x
                                         {{item.Cantidad}}</div>
-                                        <button @click="crearFactura()" class="btn btn-success">Procesar carrito</button>
+                                    <button @click="crearFactura()" class="btn btn-success">Procesar carrito</button>
                                 </div>
                             </div>
                         </li>
@@ -48,7 +61,7 @@
         <section class="container mt-3 mb-5">
             <div class="row">
                 <div class="col-12 mt-5">
-                    <h4>Productos Destacados</h4>
+                    <h4>Productos</h4>
                 </div>
 
 
@@ -75,6 +88,42 @@
             </div>
         </footer>
 
+<!-- Modal -->
+<div class="modal fade" id="facturasModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Pedidos relizados</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+          <table class="table table-striped">
+              <thead>
+                  <tr>
+                      <th>Fecha</th>
+                      <th>Factura</th>
+                      <th>Total</th>
+                      <th>Acciones</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr v-for="(factura, index) in facturas" :key="index">
+                      <td>{{factura.IdFactura}}</td>
+                      <td>{{factura.Fecha}}</td>
+                      <td>{{factura.Total}}</td>
+                      <td><button class="btn btn-info">Ver PDF</button></td>
+                  </tr>
+              </tbody>
+          </table>
+       
+      </div>
+     
+    </div>
+  </div>
+</div>
         <!-- Modal -->
         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
@@ -139,6 +188,7 @@
         data: function () {
             return {
                 carrito: [],
+                facturas: [],
                 useriD: 0,
                 userName: '',
                 itemsCarrito: 0,
@@ -225,6 +275,25 @@
 
             },
 
+            obtenerFacturasCliente: function () {
+
+                let self =this;
+                axios.get(this.$baseUrl + 'ObtenerFacturasCliente', {
+                        params: {
+                            IdCliente: localStorage.userId,
+                        }
+
+                    })
+                    .then(function (res) {
+
+                        if (res.data) {
+                            self.facturas = res.data
+                        }
+                    }).catch(function (err) {
+                        console.log(err)
+
+                    });
+            },
             getProducts: function () {
 
                 let self = this
@@ -277,9 +346,9 @@
 
                     });
             },
-            deleteCart: function(id){
+            deleteCart: function (id) {
                 debugger;
-                 let self = this
+                let self = this
                 if (this.useriD != 0) {
                     axios.get(this.$baseUrl + 'EliminarCarritoPorCliente', {
                             params: {
@@ -312,7 +381,7 @@
                                 IdCliente: localStorage.userId,
                                 IdProducto: id,
                                 Cantidad: 1,
-                                IdCarrito:1
+                                IdCarrito: 1
                             }
 
                         })

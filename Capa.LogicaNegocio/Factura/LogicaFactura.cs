@@ -4,6 +4,7 @@ using Capa.Utilidades.GuardaErrores;
 using System;
 using System.Collections.Generic;
 using Capa.AccesoDatos.AccesoDatosCarrito;
+using Capa.AccesoDatos.SQLLinqCarritoCompras;
 
 namespace Capa.LogicaNegocio.Factura
 {
@@ -28,6 +29,23 @@ namespace Capa.LogicaNegocio.Factura
                 string NombreMetodo = System.Reflection.MethodBase.GetCurrentMethod().Name;
                 ErroresLog.InsertarErrores(NombreMetodo, "LogicaFactura", ex.Message, ex.StackTrace);
                 return objMetodoPago;
+            }
+        } 
+        public List<sp_ObtieneFacturasClienteResult> ObtenerFacturasCliente(int IdCliente)
+        {
+            List<sp_ObtieneFacturasClienteResult> facturasLista = new List<sp_ObtieneFacturasClienteResult>();
+            try
+            {
+                AccesoDatosFactura accionesFactura = new AccesoDatosFactura();
+                facturasLista = accionesFactura.ObtieneFacturasCliente(IdCliente);
+                return facturasLista;
+            }
+            catch (Exception ex)
+            {
+                GuardaErrores ErroresLog = new GuardaErrores();
+                string NombreMetodo = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErroresLog.InsertarErrores(NombreMetodo, "LogicaFactura", ex.Message, ex.StackTrace);
+                return facturasLista;
             }
         }
 

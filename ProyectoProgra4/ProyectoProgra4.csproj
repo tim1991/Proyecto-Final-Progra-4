@@ -72,6 +72,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Capa.AccesoDatos\Capa.AccesoDatos.csproj">
+      <Project>{992BAE26-944C-4F6C-99DA-ED45A0E30D89}</Project>
+      <Name>Capa.AccesoDatos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Capa.Entidades\Capa.Entidades.csproj">
       <Project>{f17a946e-76b3-4281-a6cd-5c556217210e}</Project>
       <Name>Capa.Entidades</Name>

@@ -66,6 +66,29 @@ namespace Capa.AccesoDatos.AccesoFactura
 
         }
 
+        public List<sp_ObtieneFacturasClienteResult> ObtieneFacturasCliente(int IdCliente)
+        {
+            List<sp_ObtieneFacturasClienteResult> listaFacturas = null;
+            try
+            {
+                using (CarritoDataContext FacturaDB = new CarritoDataContext())
+                {
+
+                    listaFacturas = FacturaDB.sp_ObtieneFacturasCliente(IdCliente).ToList();
+                    return (listaFacturas);
+                }
+            }
+            catch (Exception ex)
+            {
+                GuardaErrores ErroresLog = new GuardaErrores();
+                string NombreMetodo = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErroresLog.InsertarErrores(NombreMetodo, "DatosFactura", ex.Message, ex.StackTrace);
+                return listaFacturas;
+            }
+
+
+        }
+
         public bool VaciarCarrito(int IdCliente)
         {
             try

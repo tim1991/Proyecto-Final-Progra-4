@@ -138,12 +138,62 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       carrito: [],
+      facturas: [],
       useriD: 0,
       userName: '',
       itemsCarrito: 0,
@@ -217,6 +267,20 @@ __webpack_require__.r(__webpack_exports__);
           text: 'El usuario ingresado no existe, verifique sus datos'
         });
         self.$store.commit('loader', false);
+      });
+    },
+    obtenerFacturasCliente: function obtenerFacturasCliente() {
+      var self = this;
+      axios.get(this.$baseUrl + 'ObtenerFacturasCliente', {
+        params: {
+          IdCliente: localStorage.userId
+        }
+      }).then(function (res) {
+        if (res.data) {
+          self.facturas = res.data;
+        }
+      })["catch"](function (err) {
+        console.log(err);
       });
     },
     getProducts: function getProducts() {
@@ -358,7 +422,59 @@ var render = function() {
               _vm._m(1),
               _vm._v(" "),
               _vm.useriD != 0
-                ? _c("li", [_c("a", [_vm._v("Hola, " + _vm._s(_vm.userName))])])
+                ? _c("li", [
+                    _c("div", { staticClass: "dropdown show" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-secondary dropdown-toggle",
+                          attrs: {
+                            href: "#",
+                            role: "button",
+                            id: "dropdownMenuLink",
+                            "data-toggle": "dropdown",
+                            "aria-haspopup": "true",
+                            "aria-expanded": "false"
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                    Hola, " +
+                              _vm._s(_vm.userName) +
+                              "\n                                "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "dropdown-menu",
+                          staticStyle: { "min-width": "200px" },
+                          attrs: { "aria-labelledby": "dropdownMenuLink" }
+                        },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "dropdown-item",
+                              staticStyle: { color: "black" },
+                              attrs: {
+                                "data-toggle": "modal",
+                                "data-target": "#facturasModal"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.obtenerFacturasCliente()
+                                }
+                              }
+                            },
+                            [_vm._v("Ver mis pedidos")]
+                          )
+                        ]
+                      )
+                    ])
+                  ])
                 : _vm._e(),
               _vm._v(" "),
               _vm.useriD == 0
@@ -396,7 +512,7 @@ var render = function() {
                       _vm._v(
                         " Carrito (" +
                           _vm._s(_vm.itemsCarrito) +
-                          ")\n                            "
+                          ")\n                                "
                       )
                     ]
                   ),
@@ -440,9 +556,9 @@ var render = function() {
                               }
                             }),
                             _vm._v(
-                              "  " +
+                              " " +
                                 _vm._s(item.NombreProducto) +
-                                " x\n                                    " +
+                                " x\n                                        " +
                                 _vm._s(item.Cantidad)
                             )
                           ]
@@ -523,7 +639,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "Agregar\n                            al\n                            carrito"
+                            "Agregar\n                                al\n                                carrito"
                           )
                         ]
                       )
@@ -545,7 +661,7 @@ var render = function() {
       {
         staticClass: "modal fade",
         attrs: {
-          id: "loginModal",
+          id: "facturasModal",
           tabindex: "-1",
           role: "dialog",
           "aria-labelledby": "exampleModalLabel",
@@ -559,6 +675,53 @@ var render = function() {
           [
             _c("div", { staticClass: "modal-content" }, [
               _vm._m(5),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("table", { staticClass: "table table-striped" }, [
+                  _vm._m(6),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.facturas, function(factura, index) {
+                      return _c("tr", { key: index }, [
+                        _c("td", [_vm._v(_vm._s(factura.IdFactura))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(factura.Fecha))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(factura.Total))]),
+                        _vm._v(" "),
+                        _vm._m(7, true)
+                      ])
+                    }),
+                    0
+                  )
+                ])
+              ])
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "loginModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(8),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _vm.useriD == 0
@@ -593,7 +756,7 @@ var render = function() {
                           ),
                           _vm._v(" "),
                           _c("div", { staticClass: "input-group mb-3" }, [
-                            _vm._m(6),
+                            _vm._m(9),
                             _vm._v(" "),
                             _c("input", {
                               directives: [
@@ -645,7 +808,7 @@ var render = function() {
                           ),
                           _vm._v(" "),
                           _c("div", { staticClass: "input-group mb-3" }, [
-                            _vm._m(7),
+                            _vm._m(10),
                             _vm._v(" "),
                             _c("input", {
                               directives: [
@@ -684,7 +847,7 @@ var render = function() {
                           ])
                         ]),
                         _vm._v(" "),
-                        _vm._m(8)
+                        _vm._m(11)
                       ]
                     )
                   : _vm._e()
@@ -731,7 +894,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-12 mt-5" }, [
-      _c("h4", [_vm._v("Productos Destacados")])
+      _c("h4", [_vm._v("Productos")])
     ])
   },
   function() {
@@ -744,6 +907,55 @@ var staticRenderFns = [
           _vm._v("Tienda en Linea 2020, Derechos Reservados")
         ])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Pedidos relizados")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Fecha")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Factura")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Total")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Acciones")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("button", { staticClass: "btn btn-info" }, [_vm._v("Ver PDF")])
     ])
   },
   function() {
