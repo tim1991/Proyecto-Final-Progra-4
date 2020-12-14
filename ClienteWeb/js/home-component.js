@@ -135,6 +135,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -161,7 +164,6 @@ __webpack_require__.r(__webpack_exports__);
       this.useriD = localStorage.userId;
       this.userName = localStorage.usuario;
       this.obtenerCarrito();
-      ObtenerCarritoPorCliente;
     }
   },
   validations: {
@@ -238,6 +240,27 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         console.log(err);
       });
+    },
+    deleteCart: function deleteCart(id) {
+      debugger;
+      var self = this;
+
+      if (this.useriD != 0) {
+        axios.get(this.$baseUrl + 'EliminarCarritoPorCliente', {
+          params: {
+            IdCarrito: id
+          }
+        }).then(function (res) {
+          if (res.data) {
+            $.alert("Item eliminado del carrito");
+            self.obtenerCarrito();
+          }
+        })["catch"](function (err) {
+          console.log(err);
+        });
+      } else {
+        $.alert("Debes de ingresar con tu cuenta para agregar al carrito");
+      }
     },
     addCart: function addCart(id) {
       var self = this;
@@ -367,36 +390,55 @@ var render = function() {
                     "div",
                     {
                       staticClass: "dropdown-menu",
+                      staticStyle: { "min-width": "200px" },
                       attrs: { "aria-labelledby": "dropdownMenuLink" }
                     },
-                    _vm._l(_vm.carrito, function(item, key) {
-                      return _c(
-                        "a",
-                        {
-                          key: key,
-                          staticClass: "dropdown-item",
-                          staticStyle: { color: "black" },
-                          attrs: { href: "#" }
-                        },
-                        [
-                          _c("img", {
-                            staticClass: "card-img-top",
-                            staticStyle: { width: "40px" },
-                            attrs: {
-                              src: item.ImagenProducto,
-                              alt: "Card image cap"
-                            }
-                          }),
-                          _vm._v(
-                            " " +
-                              _vm._s(item.NombreProducto) +
-                              " x\n                                    " +
-                              _vm._s(item.Cantidad)
-                          )
-                        ]
-                      )
-                    }),
-                    0
+                    [
+                      _vm._l(_vm.carrito, function(item, key) {
+                        return _c(
+                          "div",
+                          {
+                            key: key,
+                            staticClass: "dropdown-item",
+                            staticStyle: { color: "black" }
+                          },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticStyle: { color: "red" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.deleteCart(item.IdCarrito)
+                                  }
+                                }
+                              },
+                              [_c("i", { staticClass: "fas fa-trash" })]
+                            ),
+                            _vm._v(" "),
+                            _c("img", {
+                              staticClass: "card-img-top",
+                              staticStyle: { width: "40px" },
+                              attrs: {
+                                src: item.ImagenProducto,
+                                alt: "Card image cap"
+                              }
+                            }),
+                            _vm._v(
+                              "  " +
+                                _vm._s(item.NombreProducto) +
+                                " x\n                                    " +
+                                _vm._s(item.Cantidad)
+                            )
+                          ]
+                        )
+                      }),
+                      _vm._v(" "),
+                      _c("button", { staticClass: "btn btn-success" }, [
+                        _vm._v("Procesar carrito")
+                      ])
+                    ],
+                    2
                   )
                 ])
               ])

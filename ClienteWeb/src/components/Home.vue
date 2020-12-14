@@ -20,11 +20,14 @@
                                     <i class="fas fa-shopping-cart"></i> Carrito ({{itemsCarrito}})
                                 </a>
 
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a style="color: black;" v-for="(item,key) in carrito" :key="key"
-                                        class="dropdown-item" href="#"><img class="card-img-top" style="width: 40px;"
-                                            :src="item.ImagenProducto" alt="Card image cap"> {{item.NombreProducto}} x
-                                        {{item.Cantidad}}</a>
+                                <div class="dropdown-menu" style="min-width: 200px;" aria-labelledby="dropdownMenuLink">
+                                    <div style="color: black;" v-for="(item,key) in carrito" :key="key"
+                                        class="dropdown-item">
+                                        <a style="color:red" @click="deleteCart(item.IdCarrito)"> <i class="fas fa-trash"></i></a>
+                                        <img class="card-img-top" style="width: 40px;"
+                                            :src="item.ImagenProducto" alt="Card image cap">  {{item.NombreProducto}} x
+                                        {{item.Cantidad}}</div>
+                                        <button class="btn btn-success">Procesar carrito</button>
                                 </div>
                             </div>
                         </li>
@@ -156,7 +159,6 @@
                 this.useriD = localStorage.userId;
                 this.userName = localStorage.usuario;
                 this.obtenerCarrito()
-                ObtenerCarritoPorCliente
             }
         },
         validations: {
@@ -254,6 +256,32 @@
                         console.log(err)
 
                     });
+            },
+            deleteCart: function(id){
+                debugger;
+                 let self = this
+                if (this.useriD != 0) {
+                    axios.get(this.$baseUrl + 'EliminarCarritoPorCliente', {
+                            params: {
+                                IdCarrito: id
+                            }
+
+                        })
+                        .then(function (res) {
+
+                            if (res.data) {
+                                $.alert("Item eliminado del carrito");
+                                self.obtenerCarrito()
+                            }
+                        }).catch(function (err) {
+                            console.log(err)
+
+                        });
+                } else {
+                    $.alert("Debes de ingresar con tu cuenta para agregar al carrito");
+                }
+
+
             },
             addCart: function (id) {
 
