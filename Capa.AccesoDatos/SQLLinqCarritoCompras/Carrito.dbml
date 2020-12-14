@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DB_A6B512_dmatarrita2" Class="CarritoDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=sql5086.site4now.net;Initial Catalog=DB_A6B512_dmatarrita2;Persist Security Info=True;User ID=DB_A6B512_dmatarrita2_admin;MultipleActiveResultSets=True;Application Name=EntityFramework" SettingsObjectName="Capa.AccesoDatos.Properties.Settings" SettingsPropertyName="DB_A6B512_dmatarrita2ConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=sql5086.site4now.net;Initial Catalog=DB_A6B512_dmatarrita2;Persist Security Info=True;User ID=DB_A6B512_dmatarrita2_admin;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;TrustServerCertificate=False" SettingsObjectName="Capa.AccesoDatos.Properties.Settings" SettingsPropertyName="DB_A6B512_dmatarrita2ConnectionString" Provider="System.Data.SqlClient" />
   <Function Name="dbo.sp_InsertarErrorLog" Method="sp_InsertarErrorLog">
     <Parameter Name="MetodoError" Parameter="metodoError" Type="System.String" DbType="VarChar(300)" />
     <Parameter Name="Clase" Parameter="clase" Type="System.String" DbType="VarChar(60)" />
@@ -10,16 +10,6 @@
   <Function Name="dbo.sp_ObtieneProductosPorCategoria" Method="sp_ObtieneProductosPorCategoria">
     <Parameter Name="IdCategoria" Parameter="idCategoria" Type="System.Int32" DbType="Int" />
     <ElementType Name="sp_ObtieneProductosPorCategoriaResult">
-      <Column Name="IdProducto" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="NombreProducto" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="DescripcionProducto" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="PrecioProducto" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
-      <Column Name="ImagenProducto" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="IdCategoria" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.sp_ObtieneProductos" Method="sp_ObtieneProductos">
-    <ElementType Name="sp_ObtieneProductosResult">
       <Column Name="IdProducto" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="NombreProducto" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="DescripcionProducto" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
@@ -104,31 +94,5 @@
       <Column Name="FechaModificacion" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
       <Column Name="Contrasena" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
     </ElementType>
-  </Function>
-  <Function Name="dbo.sp_AgregarItemsFactura" Method="sp_AgregarItemsFactura">
-    <Parameter Name="IdProducto" Parameter="idProducto" Type="System.Int32" DbType="Int" />
-    <Parameter Name="IdFactura" Parameter="idFactura" Type="System.Int32" DbType="Int" />
-    <Parameter Name="Cantidad" Parameter="cantidad" Type="System.Int32" DbType="Int" />
-    <Parameter Name="SubTotal" Parameter="subTotal" Type="System.Decimal" DbType="Decimal(18,2)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.sp_CrearFactura" Method="sp_CrearFactura">
-    <Parameter Name="IdCliente" Parameter="idCliente" Type="System.Int32" DbType="Int" />
-    <Parameter Name="FechaFactura" Parameter="fechaFactura" Type="System.DateTime" DbType="DateTime" />
-    <Parameter Name="Total" Parameter="total" Type="System.Decimal" DbType="Decimal(18,2)" />
-    <ElementType Name="sp_CrearFacturaResult">
-      <Column Name="ID" Type="System.Decimal" DbType="Decimal(38,0)" CanBeNull="true" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.sp_AgregarItemsFactura" Method="sp_AgregarItemsFactura1">
-    <Parameter Name="IdProducto" Parameter="idProducto" Type="System.Int32" DbType="Int" />
-    <Parameter Name="IdFactura" Parameter="idFactura" Type="System.Int32" DbType="Int" />
-    <Parameter Name="Cantidad" Parameter="cantidad" Type="System.Int32" DbType="Int" />
-    <Parameter Name="SubTotal" Parameter="subTotal" Type="System.Decimal" DbType="Decimal(18,2)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.sp_VaciarCarrito" Method="sp_VaciarCarrito">
-    <Parameter Name="IdCliente" Parameter="idCliente" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
   </Function>
 </Database>

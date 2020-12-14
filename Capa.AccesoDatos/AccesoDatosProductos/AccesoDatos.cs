@@ -109,8 +109,6 @@ namespace Capa.AccesoDatos
                     //CantidadDisponible = list[0].CantidadDisponibles;
                     return CantidadDisponible;
                 }
-
-                return CantidadDisponible;
             }
             catch (Exception ex)
             {
@@ -118,6 +116,46 @@ namespace Capa.AccesoDatos
                 string NombreMetodo = System.Reflection.MethodBase.GetCurrentMethod().Name;
                 ErroresLog.InsertarErrores(NombreMetodo, "AccesoDatosProducto", ex.Message, ex.StackTrace);
                 return CantidadDisponible;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene productos por nombre
+        /// </summary>
+        /// <param name="NombreProducto"></param>
+        /// <returns></returns>
+        public List<Producto> ObtenerProductosXNombre(string NombreProducto)
+        {
+            List<Producto> listaProductos = new List<Producto>();
+            try
+            {
+                using (CarritoDataContext Carrito = new CarritoDataContext())
+                {
+                    List<sp_ObtieneProductoPorNombreResult> list = Carrito.sp_ObtieneProductoPorNombre(NombreProducto).ToList();
+
+
+                    foreach (var item in list)
+                    {
+                        Producto objProducto = new Producto();
+                        objProducto.IdProducto = item.IdProducto;
+                        objProducto.CantidadDisponible = item.CantidadDisponibles;
+                        objProducto.NombreProducto = item.NombreProducto;
+                        objProducto.PrecioProducto = item.PrecioProducto;
+                        objProducto.DescripcionProducto = item.DescripcionProducto;
+                        objProducto.IdCategoria = item.IdCategoria;
+                        objProducto.ImagenProducto = item.ImagenProducto;
+
+                        listaProductos.Add(objProducto);
+                    }
+                    return listaProductos;
+                }
+            }
+            catch (Exception ex)
+            {
+                GuardaErrores ErroresLog = new GuardaErrores();
+                string NombreMetodo = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErroresLog.InsertarErrores(NombreMetodo, "AccesoDatosProducto", ex.Message, ex.StackTrace);
+                return listaProductos;
             }
         }
     }
