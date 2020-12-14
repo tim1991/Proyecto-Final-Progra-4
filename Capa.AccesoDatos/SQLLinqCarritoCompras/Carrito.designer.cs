@@ -76,13 +76,6 @@ namespace Capa.AccesoDatos.SQLLinqCarritoCompras
 			return ((ISingleResult<sp_ObtieneProductosPorCategoriaResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_ObtieneProductos")]
-		public ISingleResult<sp_ObtieneProductosResult> sp_ObtieneProductos()
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-			return ((ISingleResult<sp_ObtieneProductosResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_InsertarCarritoPorCliente")]
 		public int sp_InsertarCarritoPorCliente([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdCliente", DbType="Int")] System.Nullable<int> idCliente, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdProducto", DbType="Int")] System.Nullable<int> idProducto, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Cantidad", DbType="Int")] System.Nullable<int> cantidad)
 		{
@@ -139,17 +132,11 @@ namespace Capa.AccesoDatos.SQLLinqCarritoCompras
 			return ((ISingleResult<sp_LoginClienteResult>)(result.ReturnValue));
 		}
 		
-
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_CrearFactura")]
-		public ISingleResult<sp_CrearFacturaResult> sp_CrearFactura([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdCliente", DbType="Int")] System.Nullable<int> idCliente, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="FechaFactura", DbType="DateTime")] System.Nullable<System.DateTime> fechaFactura, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Total", DbType="Decimal(18,2)")] System.Nullable<decimal> total)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_ObtieneProductoPorNombre")]
+		public ISingleResult<sp_ObtieneProductoPorNombreResult> sp_ObtieneProductoPorNombre([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Nombre", DbType="VarChar(100)")] string nombre)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idCliente, fechaFactura, total);
-			return ((ISingleResult<sp_CrearFacturaResult>)(result.ReturnValue));
-		}
-		
-
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), nombre);
+			return ((ISingleResult<sp_ObtieneProductoPorNombreResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -269,7 +256,195 @@ namespace Capa.AccesoDatos.SQLLinqCarritoCompras
 		}
 	}
 	
-
+	public partial class sp_ObtieneCarritoPorClienteResult
+	{
+		
+		private int _IdCliente;
+		
+		private string _Nombre;
+		
+		private string _Apellido;
+		
+		private int _IdProducto;
+		
+		private string _NombreProducto;
+		
+		private string _ImagenProducto;
+		
+		private string _DescripcionProducto;
+		
+		private decimal _PrecioProducto;
+		
+		private int _IdCategoria;
+		
+		private System.Nullable<int> _Cantidad;
+		
+		public sp_ObtieneCarritoPorClienteResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdCliente", DbType="Int NOT NULL")]
+		public int IdCliente
+		{
+			get
+			{
+				return this._IdCliente;
+			}
+			set
+			{
+				if ((this._IdCliente != value))
+				{
+					this._IdCliente = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Nombre
+		{
+			get
+			{
+				return this._Nombre;
+			}
+			set
+			{
+				if ((this._Nombre != value))
+				{
+					this._Nombre = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Apellido", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Apellido
+		{
+			get
+			{
+				return this._Apellido;
+			}
+			set
+			{
+				if ((this._Apellido != value))
+				{
+					this._Apellido = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdProducto", DbType="Int NOT NULL")]
+		public int IdProducto
+		{
+			get
+			{
+				return this._IdProducto;
+			}
+			set
+			{
+				if ((this._IdProducto != value))
+				{
+					this._IdProducto = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreProducto", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string NombreProducto
+		{
+			get
+			{
+				return this._NombreProducto;
+			}
+			set
+			{
+				if ((this._NombreProducto != value))
+				{
+					this._NombreProducto = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ImagenProducto", DbType="VarChar(MAX)")]
+		public string ImagenProducto
+		{
+			get
+			{
+				return this._ImagenProducto;
+			}
+			set
+			{
+				if ((this._ImagenProducto != value))
+				{
+					this._ImagenProducto = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DescripcionProducto", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string DescripcionProducto
+		{
+			get
+			{
+				return this._DescripcionProducto;
+			}
+			set
+			{
+				if ((this._DescripcionProducto != value))
+				{
+					this._DescripcionProducto = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrecioProducto", DbType="Decimal(18,2) NOT NULL")]
+		public decimal PrecioProducto
+		{
+			get
+			{
+				return this._PrecioProducto;
+			}
+			set
+			{
+				if ((this._PrecioProducto != value))
+				{
+					this._PrecioProducto = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdCategoria", DbType="Int NOT NULL")]
+		public int IdCategoria
+		{
+			get
+			{
+				return this._IdCategoria;
+			}
+			set
+			{
+				if ((this._IdCategoria != value))
+				{
+					this._IdCategoria = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cantidad", DbType="Int")]
+		public System.Nullable<int> Cantidad
+		{
+			get
+			{
+				return this._Cantidad;
+			}
+			set
+			{
+				if ((this._Cantidad != value))
+				{
+					this._Cantidad = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_ObtieneDatosClientePorClienteResult
 	{
 		
 		private int _IdCliente;
@@ -284,7 +459,9 @@ namespace Capa.AccesoDatos.SQLLinqCarritoCompras
 		
 		private string _Direccion;
 		
-
+		private string _Contrasena;
+		
+		public sp_ObtieneDatosClientePorClienteResult()
 		{
 		}
 		
@@ -383,7 +560,80 @@ namespace Capa.AccesoDatos.SQLLinqCarritoCompras
 				}
 			}
 		}
-
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Contrasena", DbType="VarChar(100)")]
+		public string Contrasena
+		{
+			get
+			{
+				return this._Contrasena;
+			}
+			set
+			{
+				if ((this._Contrasena != value))
+				{
+					this._Contrasena = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_LoginClienteResult
+	{
+		
+		private int _IdCliente;
+		
+		private string _Nombre;
+		
+		private string _Apellido;
+		
+		private string _Email;
+		
+		private string _Telefono;
+		
+		private string _Direccion;
+		
+		private System.DateTime _FechaCreacion;
+		
+		private System.Nullable<System.DateTime> _FechaModificacion;
+		
+		private string _Contrasena;
+		
+		public sp_LoginClienteResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdCliente", DbType="Int NOT NULL")]
+		public int IdCliente
+		{
+			get
+			{
+				return this._IdCliente;
+			}
+			set
+			{
+				if ((this._IdCliente != value))
+				{
+					this._IdCliente = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Nombre
+		{
+			get
+			{
+				return this._Nombre;
+			}
+			set
+			{
+				if ((this._Nombre != value))
+				{
+					this._Nombre = value;
+				}
+			}
+		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Apellido", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
 		public string Apellido
@@ -401,7 +651,24 @@ namespace Capa.AccesoDatos.SQLLinqCarritoCompras
 			}
 		}
 		
-
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(80) NOT NULL", CanBeNull=false)]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this._Email = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Telefono", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
+		public string Telefono
 		{
 			get
 			{
@@ -416,7 +683,24 @@ namespace Capa.AccesoDatos.SQLLinqCarritoCompras
 			}
 		}
 		
-
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Direccion", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string Direccion
+		{
+			get
+			{
+				return this._Direccion;
+			}
+			set
+			{
+				if ((this._Direccion != value))
+				{
+					this._Direccion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaCreacion", DbType="DateTime2 NOT NULL")]
+		public System.DateTime FechaCreacion
 		{
 			get
 			{
@@ -593,230 +877,6 @@ namespace Capa.AccesoDatos.SQLLinqCarritoCompras
 				if ((this._CantidadDisponibles != value))
 				{
 					this._CantidadDisponibles = value;
-				}
-			}
-		}
-	}
-	
-
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Contrasena", DbType="VarChar(100)")]
-		public string Contrasena
-		{
-			get
-			{
-				return this._Contrasena;
-			}
-			set
-			{
-				if ((this._Contrasena != value))
-				{
-					this._Contrasena = value;
-				}
-			}
-		}
-	}
-	
-	public partial class sp_ObtieneMetodosPagoResult
-	{
-		
-		private int _IdMetodoPago;
-		
-		private string _NombreMetodoPAgo;
-		
-		public sp_ObtieneMetodosPagoResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdMetodoPago", DbType="Int NOT NULL")]
-		public int IdMetodoPago
-		{
-			get
-			{
-				return this._IdMetodoPago;
-			}
-			set
-			{
-				if ((this._IdMetodoPago != value))
-				{
-					this._IdMetodoPago = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreMetodoPAgo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string NombreMetodoPAgo
-		{
-			get
-			{
-				return this._NombreMetodoPAgo;
-			}
-			set
-			{
-				if ((this._NombreMetodoPAgo != value))
-				{
-					this._NombreMetodoPAgo = value;
-				}
-			}
-		}
-	}
-	
-	public partial class sp_ObtieneProductosResult
-	{
-		
-		private int _IdProducto;
-		
-		private string _NombreProducto;
-		
-		private string _DescripcionProducto;
-		
-		private decimal _PrecioProducto;
-		
-		private string _ImagenProducto;
-		
-		private int _IdCategoria;
-		
-		private int _CantidadDisponibles;
-		
-		public sp_ObtieneProductosResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdProducto", DbType="Int NOT NULL")]
-		public int IdProducto
-		{
-			get
-			{
-				return this._IdProducto;
-			}
-			set
-			{
-				if ((this._IdProducto != value))
-				{
-					this._IdProducto = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreProducto", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string NombreProducto
-		{
-			get
-			{
-				return this._NombreProducto;
-			}
-			set
-			{
-				if ((this._NombreProducto != value))
-				{
-					this._NombreProducto = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DescripcionProducto", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
-		public string DescripcionProducto
-		{
-			get
-			{
-				return this._DescripcionProducto;
-			}
-			set
-			{
-				if ((this._DescripcionProducto != value))
-				{
-					this._DescripcionProducto = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PrecioProducto", DbType="Decimal(18,2) NOT NULL")]
-		public decimal PrecioProducto
-		{
-			get
-			{
-				return this._PrecioProducto;
-			}
-			set
-			{
-				if ((this._PrecioProducto != value))
-				{
-					this._PrecioProducto = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ImagenProducto", DbType="VarChar(MAX)")]
-		public string ImagenProducto
-		{
-			get
-			{
-				return this._ImagenProducto;
-			}
-			set
-			{
-				if ((this._ImagenProducto != value))
-				{
-					this._ImagenProducto = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdCategoria", DbType="Int NOT NULL")]
-		public int IdCategoria
-		{
-			get
-			{
-				return this._IdCategoria;
-			}
-			set
-			{
-				if ((this._IdCategoria != value))
-				{
-					this._IdCategoria = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CantidadDisponibles", DbType="Int NOT NULL")]
-		public int CantidadDisponibles
-		{
-			get
-			{
-				return this._CantidadDisponibles;
-			}
-			set
-			{
-				if ((this._CantidadDisponibles != value))
-				{
-					this._CantidadDisponibles = value;
-				}
-			}
-		}
-	}
-	
-	public partial class sp_CrearFacturaResult
-	{
-		
-		private System.Nullable<decimal> _ID;
-		
-		public sp_CrearFacturaResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Decimal(38,0)")]
-		public System.Nullable<decimal> ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this._ID = value;
 				}
 			}
 		}

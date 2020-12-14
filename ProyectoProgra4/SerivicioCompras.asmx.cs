@@ -71,6 +71,54 @@ namespace ProyectoProgra4
             }
         }
 
+        /// <summary>
+        /// Obtiene el producto por nombre
+        /// </summary>
+        /// <param name="NombreProducto"></param>
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void ObtieneProductos(string NombreProducto)
+        {
+            try
+            {
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                Context.Response.Clear();
+                Context.Response.ContentType = "application/json";
+                ProductosLogica ObtieneProductos = new ProductosLogica();
+                List<Producto> Respuesta = ObtieneProductos.ObtieneProductosXNombre(NombreProducto);
+                Context.Response.Write(js.Serialize(Respuesta));
+
+            }
+            catch (Exception)
+            {
+                Context.Response.Write("Un error ha ocurrido por favor verifique los datos");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="NombreProducto"></param>
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void ObtieneProductosXNombre(string NombreProducto)
+        {
+            try
+            {
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                Context.Response.Clear();
+                Context.Response.ContentType = "application/json";
+                ProductosLogica ObtieneProductos = new ProductosLogica();
+                List<Producto> Respuesta = ObtieneProductos.ObtieneProductosXNombre(NombreProducto);
+                Context.Response.Write(js.Serialize(Respuesta));
+
+            }
+            catch (Exception)
+            {
+                Context.Response.Write("Un error ha ocurrido por favor verifique los datos");
+            }
+        }
+
         #endregion Productos
 
         #region Carrito
@@ -161,7 +209,7 @@ namespace ProyectoProgra4
         /// <param name="Cantidad"></param>
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void InsertarCarritoPorCliente(int IdCliente, int IdProducto, int Cantidad, int IdCarrito =0)
+        public void InsertarCarritoPorCliente(int IdCliente, int IdProducto, int Cantidad, int IdCarrito = 0)
         {
             try
             {
