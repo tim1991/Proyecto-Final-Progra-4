@@ -10,11 +10,11 @@ namespace Capa.AccesoDatos.AccesoDatosCliente
     public class AccesoDatosCliente
     {
         /// <summary>
-        /// Obtiene los datos cliente por su ID
+        /// Login Cliente
         /// </summary>
-        /// <param name="IdCliente"></param>
+        /// <param name="Email"></param>
+        /// <param name="Contrasena"></param>
         /// <returns></returns>
-        ///
         public Cliente Login(string Email, string Contrasena)
         {
             Cliente cliente = new Cliente();
@@ -41,6 +41,12 @@ namespace Capa.AccesoDatos.AccesoDatosCliente
                 return cliente;
             }
         }
+
+        /// <summary>
+        /// Obtener Datos Cliente
+        /// </summary>
+        /// <param name="IdCliente"></param>
+        /// <returns></returns>
         public List<Cliente> ObtenerDatosCliente(int IdCliente)
         {
 
@@ -62,7 +68,6 @@ namespace Capa.AccesoDatos.AccesoDatosCliente
                         objCarrito.Telefono = item.Telefono;
                         objCarrito.Direccion = item.Direccion;
                         objCarrito.Contrasena = item.Contrasena;
-
 
                         listaCarrito.Add(objCarrito);
                     }
