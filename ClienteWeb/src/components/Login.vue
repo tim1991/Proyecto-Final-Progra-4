@@ -37,6 +37,7 @@
                 <router-link to="/Registro" exact> Registrarse! </router-link>
             </div>
         </form>
+        
     </div>
 
 </template>

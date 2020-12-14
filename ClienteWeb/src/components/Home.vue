@@ -1,13 +1,17 @@
 <template>
     <div>
-        <header class="hero" style="background:linear-gradient(#33691ebd, rgb(2 67 61 / 58%)), url(images/bg2.jpg)">
+        <header class="hero" style="background: linear-gradient(#180c049c,#351c0b99), url(images/hero.jpeg)">
             <div class="container">
-
                 <nav class="nav">
                     <div class="logo">Tienda en linea</div>
                     <ul>
                         <li><a href="#">Inicio</a></li>
                         <li><a href="#">Productos</a></li>
+                        <li v-if="useriD!=0">
+                            <a>Hola, {{userName}}</a>
+                        </li>
+
+                        <li v-if="useriD==0"><a data-toggle="modal" data-target="#loginModal">Ingresar</a></li>
                         <li>
                             <div class="dropdown show">
                                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
@@ -26,17 +30,61 @@
                         </li>
                     </ul>
                 </nav>
-                <div class="row">
-                    <div class="col-12 col-md-6">
-                        <div class="caption">
-                            <h1>Bienvenido</h1>
-                            <p>Sistemas de compras en linea.</p>
+                <div class="caption">
+                    <h1>Bienvenido</h1>
+                    <p>Sistemas de compras en linea.</p>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Buscar">
+                    </div>
+                </div>
+
+            </div>
+        </header>
+
+        <section class="container mt-3 mb-5">
+            <div class="row">
+                <div class="col-12 mt-5">
+                    <h4>Productos Destacados</h4>
+                </div>
+
+
+                <div v-for="(producto,key) in productList" :key="key" class="col-12 col-md-6 mt-3">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" :src="producto.ImagenProducto" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{producto.NombreProducto}} </h5>
+                            <p class="card-text">{{producto.DescripcionProducto}}</p>
+                            <b class="card-text">$ {{producto.PrecioProducto}}</b>
+                            <button class="btn btn-success btn-block mt-3" @click="addCart(producto.IdProducto)">Agregar
+                                al
+                                carrito</button>
                         </div>
 
                     </div>
-                    <div class="col-12 col-md-6">
+                </div>
+            </div>
+        </section>
+
+        <footer class="container-fluid">
+            <div class="container">
+                <p class="text-right">Tienda en Linea 2020, Derechos Reservados</p>
+            </div>
+        </footer>
+
+        <!-- Modal -->
+        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ingresar</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
                         <form v-if="useriD==0" class="login-form" @submit.prevent="login">
-                            <h2 style="text-align:left; text-transform:uppercase;">Ingresar</h2>
                             <p>Ingrese los datos de su cuenta para ingresar al sistema.</p>
                             <div class="form-group">
                                 <label style="font-weight: bold;font-size: 16px;">Email</label>
@@ -67,36 +115,10 @@
                                 <button class="btn btn-gradient" type="submit">Ingresar</button>
                             </div>
                         </form>
-                        <div v-if="useriD!=0" class="login-form p-3">
-                            <h4>Hola, {{userName}}</h4>
-                        </div>
                     </div>
                 </div>
             </div>
-        </header>
-
-        <section class="container mt-3">
-            <div class="row">
-                <div class="col-12">
-                    <h4>Productos Destacados</h4>
-                </div>
-
-
-                <div v-for="(producto,key) in productList" :key="key" class="col-12 col-md-6 mt-3">
-                    <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" :src="producto.ImagenProducto" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">{{producto.NombreProducto}} </h5>
-                            <p class="card-text">{{producto.DescripcionProducto}}</p>
-                            <p class="card-text">{{producto.PrecioProducto}}</p>
-                            <button class="btn btn-success btn-block" @click="addCart(producto.IdProducto)">Agregar al
-                                carrito</button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </section>
+        </div>
     </div>
 </template>
 <script>
@@ -130,7 +152,7 @@
 
             this.getProducts()
             console.log(localStorage.userId);
-                if (localStorage.userId){
+            if (localStorage.userId) {
                 this.useriD = localStorage.userId;
                 this.userName = localStorage.usuario;
                 this.obtenerCarrito()
@@ -180,7 +202,7 @@
 
                         localStorage.provider = btoa('3747309182101sdhbfu')
 
-
+                        self.obtenerCarrito()
                         self.$store.commit('loader', false)
 
 
@@ -216,24 +238,30 @@
             addCart: function (id) {
 
                 let self = this
-                axios.get('http://localhost:55466/SerivicioCompras.asmx/InsertarCarritoPorCliente', {
-                        params: {
-                            IdCliente: localStorage.userId,
-                            IdProducto: id,
-                            Cantidad: 1
-                        }
+                if (this.useriD != 0) {
+                    axios.get('http://localhost:55466/SerivicioCompras.asmx/InsertarCarritoPorCliente', {
+                            params: {
+                                IdCliente: localStorage.userId,
+                                IdProducto: id,
+                                Cantidad: 1
+                            }
 
-                    })
-                    .then(function (res) {
+                        })
+                        .then(function (res) {
 
-                        if (res.data) {
-                            $.alert("Item agregado al carrito");
-                            self.obtenerCarrito()
-                        }
-                    }).catch(function (err) {
-                        console.log(err)
+                            if (res.data) {
+                                $.alert("Item agregado al carrito");
+                                self.obtenerCarrito()
+                            }
+                        }).catch(function (err) {
+                            console.log(err)
 
-                    });
+                        });
+                } else {
+                    $.alert("Debes de ingresar con tu cuenta para agregar al carrito");
+                }
+
+
 
             },
             obtenerCarrito: function (id) {

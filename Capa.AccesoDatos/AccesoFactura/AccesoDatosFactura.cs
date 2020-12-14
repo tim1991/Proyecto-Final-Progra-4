@@ -42,6 +42,6 @@ namespace Capa.AccesoDatos.AccesoFactura
             }
         }
 
-        public int InsertarOrden 
+        //public int InsertarOrden 
     }
 }

@@ -113,6 +113,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -181,6 +203,7 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         localStorage.provider = btoa('3747309182101sdhbfu');
+        self.obtenerCarrito();
         self.$store.commit('loader', false);
       })["catch"](function (err) {
         console.log(err);
@@ -203,20 +226,25 @@ __webpack_require__.r(__webpack_exports__);
     },
     addCart: function addCart(id) {
       var self = this;
-      axios.get('http://localhost:55466/SerivicioCompras.asmx/InsertarCarritoPorCliente', {
-        params: {
-          IdCliente: localStorage.userId,
-          IdProducto: id,
-          Cantidad: 1
-        }
-      }).then(function (res) {
-        if (res.data) {
-          $.alert("Item agregado al carrito");
-          self.obtenerCarrito();
-        }
-      })["catch"](function (err) {
-        console.log(err);
-      });
+
+      if (this.useriD != 0) {
+        axios.get('http://localhost:55466/SerivicioCompras.asmx/InsertarCarritoPorCliente', {
+          params: {
+            IdCliente: localStorage.userId,
+            IdProducto: id,
+            Cantidad: 1
+          }
+        }).then(function (res) {
+          if (res.data) {
+            $.alert("Item agregado al carrito");
+            self.obtenerCarrito();
+          }
+        })["catch"](function (err) {
+          console.log(err);
+        });
+      } else {
+        $.alert("Debes de ingresar con tu cuenta para agregar al carrito");
+      }
     },
     obtenerCarrito: function obtenerCarrito(id) {
       var self = this;
@@ -262,7 +290,7 @@ var render = function() {
         staticClass: "hero",
         staticStyle: {
           background:
-            "linear-gradient(#33691ebd, rgb(2 67 61 / 58%)), url(images/bg2.jpg)"
+            "linear-gradient(#180c049c,#351c0b99), url(images/hero.jpeg)"
         }
       },
       [
@@ -274,6 +302,25 @@ var render = function() {
               _vm._m(0),
               _vm._v(" "),
               _vm._m(1),
+              _vm._v(" "),
+              _vm.useriD != 0
+                ? _c("li", [_c("a", [_vm._v("Hola, " + _vm._s(_vm.userName))])])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.useriD == 0
+                ? _c("li", [
+                    _c(
+                      "a",
+                      {
+                        attrs: {
+                          "data-toggle": "modal",
+                          "data-target": "#loginModal"
+                        }
+                      },
+                      [_vm._v("Ingresar")]
+                    )
+                  ])
+                : _vm._e(),
               _vm._v(" "),
               _c("li", [
                 _c("div", { staticClass: "dropdown show" }, [
@@ -340,162 +387,17 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _vm._m(2),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-12 col-md-6" }, [
-              _vm.useriD == 0
-                ? _c(
-                    "form",
-                    {
-                      staticClass: "login-form",
-                      on: {
-                        submit: function($event) {
-                          $event.preventDefault()
-                          return _vm.login($event)
-                        }
-                      }
-                    },
-                    [
-                      _c(
-                        "h2",
-                        {
-                          staticStyle: {
-                            "text-align": "left",
-                            "text-transform": "uppercase"
-                          }
-                        },
-                        [_vm._v("Ingresar")]
-                      ),
-                      _vm._v(" "),
-                      _c("p", [
-                        _vm._v(
-                          "Ingrese los datos de su cuenta para ingresar al sistema."
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c(
-                          "label",
-                          {
-                            staticStyle: {
-                              "font-weight": "bold",
-                              "font-size": "16px"
-                            }
-                          },
-                          [_vm._v("Email")]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "input-group mb-3" }, [
-                          _vm._m(3),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.user.email,
-                                expression: "user.email"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            class: {
-                              "is-invalid":
-                                _vm.submitted && _vm.$v.user.email.$error
-                            },
-                            attrs: {
-                              type: "email",
-                              placeholder: "Ingrese su email",
-                              name: "",
-                              id: "email"
-                            },
-                            domProps: { value: _vm.user.email },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(_vm.user, "email", $event.target.value)
-                              }
-                            }
-                          })
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c(
-                          "label",
-                          {
-                            staticStyle: {
-                              "font-weight": "bold",
-                              "font-size": "16px"
-                            }
-                          },
-                          [_vm._v("Contraseña")]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "input-group mb-3" }, [
-                          _vm._m(4),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.user.password,
-                                expression: "user.password"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            class: {
-                              "is-invalid":
-                                _vm.submitted && _vm.$v.user.password.$error
-                            },
-                            attrs: {
-                              type: "password",
-                              placeholder: "Ingrese su contraseña",
-                              name: "",
-                              id: "password"
-                            },
-                            domProps: { value: _vm.user.password },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.user,
-                                  "password",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          })
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(5)
-                    ]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.useriD != 0
-                ? _c("div", { staticClass: "login-form p-3" }, [
-                    _c("h4", [_vm._v("Hola, " + _vm._s(_vm.userName))])
-                  ])
-                : _vm._e()
-            ])
-          ])
+          _vm._m(2)
         ])
       ]
     ),
     _vm._v(" "),
-    _c("section", { staticClass: "container mt-3" }, [
+    _c("section", { staticClass: "container mt-3 mb-5" }, [
       _c(
         "div",
         { staticClass: "row" },
         [
-          _vm._m(6),
+          _vm._m(3),
           _vm._v(" "),
           _vm._l(_vm.productList, function(producto, key) {
             return _c(
@@ -523,14 +425,14 @@ var render = function() {
                         _vm._v(_vm._s(producto.DescripcionProducto))
                       ]),
                       _vm._v(" "),
-                      _c("p", { staticClass: "card-text" }, [
-                        _vm._v(_vm._s(producto.PrecioProducto))
+                      _c("b", { staticClass: "card-text" }, [
+                        _vm._v("$ " + _vm._s(producto.PrecioProducto))
                       ]),
                       _vm._v(" "),
                       _c(
                         "button",
                         {
-                          staticClass: "btn btn-success btn-block",
+                          staticClass: "btn btn-success btn-block mt-3",
                           on: {
                             click: function($event) {
                               return _vm.addCart(producto.IdProducto)
@@ -539,7 +441,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "Agregar al\n                            carrito"
+                            "Agregar\n                            al\n                            carrito"
                           )
                         ]
                       )
@@ -552,7 +454,164 @@ var render = function() {
         ],
         2
       )
-    ])
+    ]),
+    _vm._v(" "),
+    _vm._m(4),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "loginModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(5),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _vm.useriD == 0
+                  ? _c(
+                      "form",
+                      {
+                        staticClass: "login-form",
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.login($event)
+                          }
+                        }
+                      },
+                      [
+                        _c("p", [
+                          _vm._v(
+                            "Ingrese los datos de su cuenta para ingresar al sistema."
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "label",
+                            {
+                              staticStyle: {
+                                "font-weight": "bold",
+                                "font-size": "16px"
+                              }
+                            },
+                            [_vm._v("Email")]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "input-group mb-3" }, [
+                            _vm._m(6),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.user.email,
+                                  expression: "user.email"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid":
+                                  _vm.submitted && _vm.$v.user.email.$error
+                              },
+                              attrs: {
+                                type: "email",
+                                placeholder: "Ingrese su email",
+                                name: "",
+                                id: "email"
+                              },
+                              domProps: { value: _vm.user.email },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.user,
+                                    "email",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "label",
+                            {
+                              staticStyle: {
+                                "font-weight": "bold",
+                                "font-size": "16px"
+                              }
+                            },
+                            [_vm._v("Contraseña")]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "input-group mb-3" }, [
+                            _vm._m(7),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.user.password,
+                                  expression: "user.password"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid":
+                                  _vm.submitted && _vm.$v.user.password.$error
+                              },
+                              attrs: {
+                                type: "password",
+                                placeholder: "Ingrese su contraseña",
+                                name: "",
+                                id: "password"
+                              },
+                              domProps: { value: _vm.user.password },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.user,
+                                    "password",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _vm._m(8)
+                      ]
+                    )
+                  : _vm._e()
+              ])
+            ])
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -572,12 +631,62 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12 col-md-6" }, [
-      _c("div", { staticClass: "caption" }, [
-        _c("h1", [_vm._v("Bienvenido")]),
-        _vm._v(" "),
-        _c("p", [_vm._v("Sistemas de compras en linea.")])
+    return _c("div", { staticClass: "caption" }, [
+      _c("h1", [_vm._v("Bienvenido")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("Sistemas de compras en linea.")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", placeholder: "Buscar" }
+        })
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12 mt-5" }, [
+      _c("h4", [_vm._v("Productos Destacados")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("footer", { staticClass: "container-fluid" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("p", { staticClass: "text-right" }, [
+          _vm._v("Tienda en Linea 2020, Derechos Reservados")
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Ingresar")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
     ])
   },
   function() {
@@ -625,14 +734,6 @@ var staticRenderFns = [
         )
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12" }, [
-      _c("h4", [_vm._v("Productos Destacados")])
-    ])
   }
 ]
 render._withStripped = true

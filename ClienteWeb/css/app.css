@@ -15606,6 +15606,13 @@ h3 {
   height: calc(100vh - 200px);
 }
 
+footer {
+  background: black;
+  height: 100px;
+  line-height: 100px;
+  color: white;
+}
+
 .btn {
   outline: none !important;
   vertical-align: middle;
@@ -15633,6 +15640,11 @@ h3 {
   background-position: center !important;
 }
 
+.hero .container {
+  position: relative;
+  height: 800px;
+}
+
 .hero .caption {
   color: white;
   position: relative;
@@ -15652,6 +15664,9 @@ h3 {
   display: block;
   float: right;
   width: 100%;
+  background: #272727;
+  padding: 0 10px;
+  border-radius: 16px;
 }
 
 .hero .nav ul {
@@ -15671,9 +15686,9 @@ h3 {
 }
 
 .login-form {
-  padding: 20px;
+  padding: 0;
   background: white;
-  width: 350px;
+  width: 100%;
   margin: 20px auto;
   display: block;
   border-radius: 10px;
