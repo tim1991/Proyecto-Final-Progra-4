@@ -105,8 +105,8 @@ namespace Capa.AccesoDatos
 
                 using (CarritoDataContext Carrito = new CarritoDataContext())
                 {
-                    //List<sp_ObtieneCantidadProductosResult> list = Carrito.sp_ObtieneCantidadProductos(IdProducto).ToList();
-                    //CantidadDisponible = list[0].CantidadDisponibles;
+                    List<sp_ObtieneCantidadProductosResult> list = Carrito.sp_ObtieneCantidadProductos(IdProducto).ToList();
+                    CantidadDisponible = list[0].CantidadDisponibles;
                     return CantidadDisponible;
                 }
 
