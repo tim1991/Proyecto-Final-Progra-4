@@ -116,7 +116,7 @@ namespace Capa.LogicaNegocio.Factura
             try
             {
                 MailMessage correo = new MailMessage();
-                correo.From = new MailAddress("comprasprogra4@gmail.com", "Kyocode", System.Text.Encoding.UTF8);//Correo de salida
+                correo.From = new MailAddress("comprasprogra4@gmail.com", "Comprasenlinea.com", System.Text.Encoding.UTF8);//Correo de salida
                 correo.To.Add(correodestino); //Correo destino?
                 correo.Subject = "Compra Realizada"; //Asunto
                 correo.Body = "Su compra se realizo exitosamente"; 
@@ -125,7 +125,7 @@ namespace Capa.LogicaNegocio.Factura
                 SmtpClient smtp = new SmtpClient();
                 smtp.UseDefaultCredentials = false;
                 smtp.Host = "smtp.gmail.com"; //Host del servidor de correo
-                smtp.Port = 25; //Puerto de salida
+                smtp.Port = 587; //Puerto de salida
                 smtp.Credentials = new System.Net.NetworkCredential("comprasprogra4@gmail.com", "ArturoPrograma4");//Cuenta de correo
                 ServicePointManager.ServerCertificateValidationCallback = delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
                 smtp.EnableSsl = true;//True si el servidor de correo permite ssl
