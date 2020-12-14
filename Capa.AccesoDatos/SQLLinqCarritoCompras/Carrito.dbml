@@ -40,10 +40,6 @@
     <Parameter Name="Cantidad" Parameter="cantidad" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.sp_EliminarCarritoPorCliente" Method="sp_EliminarCarritoPorCliente">
-    <Parameter Name="IdCliente" Parameter="idCliente" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
   <Function Name="dbo.sp_ActualizarDatosCliente" Method="sp_ActualizarDatosCliente">
     <Parameter Name="IdCliente" Parameter="idCliente" Type="System.Int32" DbType="Int" />
     <Parameter Name="Nombre" Parameter="nombre" Type="System.String" DbType="VarChar(50)" />
@@ -122,10 +118,6 @@
       <Column Name="CantidadDisponibles" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
-  <Function Name="dbo.sp_EliminarCarritoPorCliente" Method="sp_EliminarCarritoPorCliente1">
-    <Parameter Name="IdCarrito" Parameter="idCarrito" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
   <Function Name="dbo.sp_ObtieneCarritoPorCliente" Method="sp_ObtieneCarritoPorCliente">
     <Parameter Name="IdCliente" Parameter="idCliente" Type="System.Int32" DbType="Int" />
     <ElementType Name="sp_ObtieneCarritoPorClienteResult">
@@ -180,5 +172,9 @@
       <Column Name="IdCategoria" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="CantidadDisponibles" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
+  </Function>
+  <Function Name="dbo.sp_EliminarCarritoPorCliente" Method="sp_EliminarCarritoPorCliente">
+    <Parameter Name="IdCarrito" Parameter="idCarrito" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
   </Function>
 </Database>
