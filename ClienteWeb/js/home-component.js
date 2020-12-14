@@ -321,7 +321,6 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     deleteCart: function deleteCart(id) {
-      debugger;
       var self = this;
 
       if (this.useriD != 0) {
