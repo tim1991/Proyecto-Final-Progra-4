@@ -333,6 +333,27 @@ namespace ProyectoProgra4
             }
         }
 
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void crearFactura(int IdCliente)
+        {
+            try
+            {
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                Context.Response.Clear();
+                Context.Response.ContentType = "application/json";
+                LogicaFactura accionesFactura = new LogicaFactura();
+                bool Respuesta = accionesFactura.CrearFactura(IdCliente);
+                Context.Response.Write(js.Serialize(Respuesta));
+
+            }
+            catch (Exception)
+            {
+                Context.Response.Write("Un error ha ocurrido por favor verifique los datos");
+            }
+        }
+
         #endregion Factura
 
     }

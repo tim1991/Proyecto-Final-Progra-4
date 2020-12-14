@@ -115,7 +115,7 @@ namespace Capa.AccesoDatos.AccesoDatosCarrito
                     foreach (var item in list)
                     {
                         Carrito objCarrito = new Carrito();
-                        objCarrito.IdCarrito = item.IdCarrito;
+                        //objCarrito.IdCarrito = item.IdCarrito;
                         objCarrito.IdUsuario = item.IdCliente;
                         objCarrito.NombreCliente = item.Nombre;
                         objCarrito.ApellidoCliente = item.Apellido;
@@ -125,7 +125,7 @@ namespace Capa.AccesoDatos.AccesoDatosCarrito
                         objCarrito.DescripcionProducto = item.DescripcionProducto;
                         objCarrito.IdCategoria = item.IdCategoria;
                         objCarrito.Cantidad = item.Cantidad;
-                        objCarrito.CantidadDisponible = item.CantidadDisponibles;
+                        //objCarrito.CantidadDisponible = item.CantidadDisponibles;
                         objCarrito.PrecioProducto = item.PrecioProducto;
 
                         listaCarrito.Add(objCarrito);

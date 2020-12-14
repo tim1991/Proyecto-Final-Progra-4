@@ -20,16 +20,16 @@ namespace Capa.AccesoDatos.AccesoFactura
             {
                 using (CarritoDataContext MetodoPagoDB = new CarritoDataContext())
                 {
-                    List<sp_ObtieneMetodosPagoResult> list = MetodoPagoDB.sp_ObtieneMetodosPago().ToList();
+                    //List<sp_ObtieneMetodosPagoResult> list = MetodoPagoDB.sp_ObtieneMetodosPago().ToList();
 
-                    foreach (var item in list)
-                    {
-                        MetodoPago objCarrito = new MetodoPago();
-                        objCarrito.IdMetodoPago = item.IdMetodoPago;
-                        objCarrito.NombreMetodoPAgo = item.NombreMetodoPAgo;
+                    //foreach (var item in list)
+                    //{
+                    //    MetodoPago objCarrito = new MetodoPago();
+                    //    objCarrito.IdMetodoPago = item.IdMetodoPago;
+                    //    objCarrito.NombreMetodoPAgo = item.NombreMetodoPAgo;
 
-                        listaMetodosPago.Add(objCarrito);
-                    }
+                    //    listaMetodosPago.Add(objCarrito);
+                    //}
                     return listaMetodosPago;
                 }
             }
@@ -42,6 +42,79 @@ namespace Capa.AccesoDatos.AccesoFactura
             }
         }
 
-        //public int InsertarOrden 
+        public int CrearFactura(int IdCliente, decimal total)
+        {
+
+            try
+            {
+                using (CarritoDataContext FacturaDB = new CarritoDataContext())
+                {
+
+                    DateTime fechaFactura = DateTime.Now;
+                    sp_CrearFacturaResult factura = FacturaDB.sp_CrearFactura(IdCliente, fechaFactura, total).FirstOrDefault();
+                    return (int)factura.ID;
+                }
+            }
+            catch (Exception ex)
+            {
+                GuardaErrores ErroresLog = new GuardaErrores();
+                string NombreMetodo = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErroresLog.InsertarErrores(NombreMetodo, "DatosFactura", ex.Message, ex.StackTrace);
+                return 0;
+            }
+
+
+        }
+
+        public bool VaciarCarrito(int IdCliente)
+        {
+            try
+            {
+                using (CarritoDataContext FacturaDB = new CarritoDataContext())
+                {
+                   
+                        FacturaDB.sp_VaciarCarrito(IdCliente);
+                    
+                    return true;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                GuardaErrores ErroresLog = new GuardaErrores();
+                string NombreMetodo = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErroresLog.InsertarErrores(NombreMetodo, "DatosFactura", ex.Message, ex.StackTrace);
+                return false;
+            }
+        }
+
+        public bool InsertarItemsFactura(List<Carrito> Carrito,int IdFactura)
+        {
+
+            try
+            {
+                using (CarritoDataContext FacturaDB = new CarritoDataContext())
+                {
+
+                    foreach (var item in Carrito)
+                    {
+                        decimal subTotal = 0;
+                        subTotal = (decimal)(subTotal + (item.PrecioProducto * item.Cantidad));
+                        FacturaDB.sp_AgregarItemsFactura(item.IdProducto, IdFactura,item.Cantidad, subTotal);
+                    }
+                    return true;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                GuardaErrores ErroresLog = new GuardaErrores();
+                string NombreMetodo = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErroresLog.InsertarErrores(NombreMetodo, "DatosFactura", ex.Message, ex.StackTrace);
+                return false;
+            }
+
+
+        }
     }
 }

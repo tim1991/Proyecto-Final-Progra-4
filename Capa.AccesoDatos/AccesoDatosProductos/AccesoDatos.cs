@@ -28,7 +28,7 @@ namespace Capa.AccesoDatos
                     {
                         Producto objProducto = new Producto();
                         objProducto.IdProducto = item.IdProducto;
-                        objProducto.CantidadDisponible = item.CantidadDisponibles;
+                        //objProducto.CantidadDisponible = item.CantidadDisponibles;
                         objProducto.NombreProducto = item.NombreProducto;
                         objProducto.PrecioProducto = item.PrecioProducto;
                         objProducto.DescripcionProducto = item.DescripcionProducto;
@@ -105,8 +105,8 @@ namespace Capa.AccesoDatos
 
                 using (CarritoDataContext Carrito = new CarritoDataContext())
                 {
-                    List<sp_ObtieneCantidadProductosResult> list = Carrito.sp_ObtieneCantidadProductos(IdProducto).ToList();
-                    CantidadDisponible = list[0].CantidadDisponibles;
+                    //List<sp_ObtieneCantidadProductosResult> list = Carrito.sp_ObtieneCantidadProductos(IdProducto).ToList();
+                    //CantidadDisponible = list[0].CantidadDisponibles;
                     return CantidadDisponible;
                 }
 
