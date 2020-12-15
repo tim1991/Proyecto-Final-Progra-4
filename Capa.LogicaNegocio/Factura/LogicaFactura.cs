@@ -37,7 +37,7 @@ namespace Capa.LogicaNegocio.Factura
                 ErroresLog.InsertarErrores(NombreMetodo, "LogicaFactura", ex.Message, ex.StackTrace);
                 return objMetodoPago;
             }
-        } 
+        }
 
         /// <summary>
         /// Obtiene las facturas del cliente
@@ -76,13 +76,13 @@ namespace Capa.LogicaNegocio.Factura
 
             decimal total = calcularTotalFactura(objCarrito);
             int consecutivoFactura = accionesFactura.CrearFactura(IdCliente, total);
-            bool insertarItemsFactura = accionesFactura.InsertarItemsFactura(objCarrito,consecutivoFactura);
+            bool insertarItemsFactura = accionesFactura.InsertarItemsFactura(objCarrito, consecutivoFactura);
 
             List<Entidades.Cliente> objDatoosCliente = new List<Entidades.Cliente>();
             AccesoDatosCliente ClienteDatos = new AccesoDatosCliente();
             objDatoosCliente = ClienteDatos.ObtenerDatosCliente(IdCliente);
 
-            EnviaFactura(objDatoosCliente[0].Email);
+            EnviaFactura(objDatoosCliente[0].Email, objCarrito, total);
 
             if (insertarItemsFactura)
             {
@@ -93,7 +93,7 @@ namespace Capa.LogicaNegocio.Factura
             {
                 return false;
             }
-            
+
         }
 
         /// <summary>
@@ -106,12 +106,12 @@ namespace Capa.LogicaNegocio.Factura
             decimal total = 0;
             foreach (var item in Carrito)
             {
-                total = (decimal) (total + (item.PrecioProducto * item.Cantidad));
+                total = (decimal)(total + (item.PrecioProducto * item.Cantidad));
             }
             return total;
         }
 
-        public bool EnviaFactura(string correodestino)
+        public bool EnviaFactura(string correodestino, List<Capa.Entidades.Carrito> objCarrito, decimal monto)
         {
             try
             {
@@ -119,7 +119,18 @@ namespace Capa.LogicaNegocio.Factura
                 correo.From = new MailAddress("comprasprogra4@gmail.com", "Comprasenlinea.com", System.Text.Encoding.UTF8);//Correo de salida
                 correo.To.Add(correodestino); //Correo destino?
                 correo.Subject = "Compra Realizada"; //Asunto
-                correo.Body = "Su compra se realizo exitosamente"; 
+                List<Entidades.Carrito> listaMetodosPago = new List<Entidades.Carrito>();
+                string[] Producto;
+                foreach (var item in objCarrito)
+                {
+                    Entidades.Carrito test = new Entidades.Carrito();
+
+                    test.NombreProducto = item.NombreProducto;
+
+                    listaMetodosPago.Add(test);
+                }
+
+                correo.Body = "Su compra se realizo exitosamente " + "y el monto total de su compra fue: " + monto;
                 correo.IsBodyHtml = true;
                 correo.Priority = MailPriority.Normal;
                 SmtpClient smtp = new SmtpClient();
@@ -132,7 +143,7 @@ namespace Capa.LogicaNegocio.Factura
                 smtp.Send(correo);
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return false;
             }
