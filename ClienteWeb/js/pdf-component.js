@@ -112,6 +112,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.idFactura = this.$route.query.id;
     this.obtenerFactura(this.idFactura);
+    this.ObtenerItemsFactura(this.idFactura);
   },
   methods: {
     obtenerFactura: function obtenerFactura(id) {
@@ -122,6 +123,18 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (res) {
         self.infoFactura = res.data;
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    ObtenerItemsFactura: function ObtenerItemsFactura(id) {
+      var self = this;
+      axios.get(this.$baseUrl + 'ObtenerItemsFactura', {
+        params: {
+          IdFactura: id
+        }
+      }).then(function (res) {
+        self.itemsFactura = res.data;
       })["catch"](function (err) {
         console.log(err);
       });
@@ -211,7 +224,31 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(2),
+            _c("div", { staticClass: "table-responsive-sm" }, [
+              _c("table", { staticClass: "table table-striped" }, [
+                _vm._m(2),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.itemsFactura, function(item, index) {
+                    return _c("tr", { key: index }, [
+                      _c("td", { staticClass: "left" }, [
+                        _vm._v(_vm._s(item.NombreProducto))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "center" }, [
+                        _vm._v(_vm._s(item.Cantidad))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "right" }, [
+                        _vm._v(_vm._s(item.SubTotal))
+                      ])
+                    ])
+                  }),
+                  0
+                )
+              ])
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-lg-4 col-sm-5" }),
@@ -264,27 +301,13 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "table-responsive-sm" }, [
-      _c("table", { staticClass: "table table-striped" }, [
-        _c("thead", [
-          _c("tr", [
-            _c("th", [_vm._v("Descripcion")]),
-            _vm._v(" "),
-            _c("th", { staticClass: "center" }, [_vm._v("Cantidad")]),
-            _vm._v(" "),
-            _c("th", { staticClass: "right" }, [_vm._v("Total")])
-          ])
-        ]),
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Descripcion")]),
         _vm._v(" "),
-        _c("tbody", [
-          _c("tr", [
-            _c("td", { staticClass: "left" }, [_vm._v("Extended License")]),
-            _vm._v(" "),
-            _c("td", { staticClass: "center" }, [_vm._v("1")]),
-            _vm._v(" "),
-            _c("td", { staticClass: "right" }, [_vm._v("$999,00")])
-          ])
-        ])
+        _c("th", { staticClass: "center" }, [_vm._v("Cantidad")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "right" }, [_vm._v("Total")])
       ])
     ])
   },

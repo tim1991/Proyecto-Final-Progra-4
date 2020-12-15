@@ -60,6 +60,24 @@ namespace Capa.LogicaNegocio.Factura
                 ErroresLog.InsertarErrores(NombreMetodo, "LogicaFactura", ex.Message, ex.StackTrace);
                 return facturasLista;
             }
+        }  
+        
+        public List<sp_ObtieneItemsFacturaIdResult> ObtenerItemsFactura(int IdFactura)
+        {
+            List<sp_ObtieneItemsFacturaIdResult> itemsLista = new List<sp_ObtieneItemsFacturaIdResult>();
+            try
+            {
+                AccesoDatosFactura accionesFactura = new AccesoDatosFactura();
+                itemsLista = accionesFactura.ObtieneItemsFactura(IdFactura);
+                return itemsLista;
+            }
+            catch (Exception ex)
+            {
+                GuardaErrores ErroresLog = new GuardaErrores();
+                string NombreMetodo = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErroresLog.InsertarErrores(NombreMetodo, "LogicaFactura", ex.Message, ex.StackTrace);
+                return itemsLista;
+            }
         }
 
         public sp_ObtieneFacturaIdResult ObtenerFacturaCliente(int IdFactura)

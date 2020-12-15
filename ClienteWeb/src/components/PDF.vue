@@ -43,10 +43,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="left">Extended License</td>
-                                        <td class="center">1</td>
-                                        <td class="right">$999,00</td>
+                                    <tr v-for="(item, index) in itemsFactura" :key="index">
+                                        <td class="left">{{item.NombreProducto}}</td>
+                                        <td class="center">{{item.Cantidad}}</td>
+                                        <td class="right">{{item.SubTotal}}</td>
                                     </tr>
                                   
                                   
@@ -100,6 +100,7 @@
             this.idFactura = this.$route.query.id;
 
             this.obtenerFactura(this.idFactura);
+            this.ObtenerItemsFactura(this.idFactura);
         },
         methods: {
 
@@ -117,6 +118,25 @@
                     .then(function (res) {
 
                         self.infoFactura = res.data
+
+                    }).catch(function (err) {
+                        console.log(err)
+
+                    });
+
+            },
+            ObtenerItemsFactura: function (id) {
+
+                let self = this
+                axios.get(this.$baseUrl + 'ObtenerItemsFactura', {
+                        params: {
+                            IdFactura: id
+                        }
+
+                    })
+                    .then(function (res) {
+
+                        self.itemsFactura = res.data
 
                     }).catch(function (err) {
                         console.log(err)

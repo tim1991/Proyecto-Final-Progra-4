@@ -411,7 +411,7 @@ namespace ProyectoProgra4
                 Context.Response.Clear();
                 Context.Response.ContentType = "application/json";
                 LogicaFactura accionesFactura = new LogicaFactura();
-                List<sp_ObtieneFacturasClienteResult> Respuesta = accionesFactura.ObtenerFacturasCliente(IdCliente);
+                List<sp_ObtieneItemsFacturaIdResult> Respuesta = accionesFactura.ObtenerItemsFactura(IdFactura);
                 Context.Response.Write(js.Serialize(Respuesta));
 
             }
