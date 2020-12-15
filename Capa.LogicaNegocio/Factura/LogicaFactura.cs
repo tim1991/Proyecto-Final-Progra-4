@@ -49,6 +49,24 @@ namespace Capa.LogicaNegocio.Factura
             }
         }
 
+        public sp_ObtieneFacturaIdResult ObtenerFacturaCliente(int IdFactura)
+        {
+            sp_ObtieneFacturaIdResult factura = new sp_ObtieneFacturaIdResult();
+            try
+            {
+                AccesoDatosFactura accionesFactura = new AccesoDatosFactura();
+                factura = accionesFactura.ObtieneFactura(IdFactura);
+                return factura;
+            }
+            catch (Exception ex)
+            {
+                GuardaErrores ErroresLog = new GuardaErrores();
+                string NombreMetodo = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                ErroresLog.InsertarErrores(NombreMetodo, "LogicaFactura", ex.Message, ex.StackTrace);
+                return factura;
+            }
+        }
+
         public Boolean CrearFactura(int IdCliente)
         {
             DatosCarrito CarritoDatos = new DatosCarrito();

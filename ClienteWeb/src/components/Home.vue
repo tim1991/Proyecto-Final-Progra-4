@@ -17,7 +17,9 @@
                                 </a>
 
                                 <div class="dropdown-menu" style="min-width: 200px;" aria-labelledby="dropdownMenuLink">
-                                    <a @click="obtenerFacturasCliente()" data-toggle="modal" data-target="#facturasModal" style="color:black;" class="dropdown-item">Ver mis pedidos</a>
+                                    <a @click="obtenerFacturasCliente()" data-toggle="modal"
+                                        data-target="#facturasModal" style="color:black;" class="dropdown-item">Ver mis
+                                        pedidos</a>
                                 </div>
                             </div>
 
@@ -88,42 +90,43 @@
             </div>
         </footer>
 
-<!-- Modal -->
-<div class="modal fade" id="facturasModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Pedidos relizados</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
+        <!-- Modal -->
+        <div class="modal fade" id="facturasModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Pedidos relizados</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
 
-          <table class="table table-striped">
-              <thead>
-                  <tr>
-                      <th>Fecha</th>
-                      <th>Factura</th>
-                      <th>Total</th>
-                      <th>Acciones</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr v-for="(factura, index) in facturas" :key="index">
-                      <td>{{factura.IdFactura}}</td>
-                      <td>{{factura.Fecha}}</td>
-                      <td>{{factura.Total}}</td>
-                      <td><button class="btn btn-info">Ver PDF</button></td>
-                  </tr>
-              </tbody>
-          </table>
-       
-      </div>
-     
-    </div>
-  </div>
-</div>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Factura</th>
+                                    <th>Total</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(factura, index) in facturas" :key="index">
+                                    <td>{{factura.IdFactura}}</td>
+                                    <td>{{factura.Fecha}}</td>
+                                    <td>{{factura.Total}}</td>
+                                    <td><button  data-dismiss="modal"  @click="obtenerPDF(factura.IdFactura)" class="btn btn-info">Ver PDF</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
         <!-- Modal -->
         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
@@ -275,9 +278,13 @@
 
             },
 
+           obtenerPDF: function (id)  {
+                this.$router.push('/Factura?id=' + id)
+            },
+
             obtenerFacturasCliente: function () {
 
-                let self =this;
+                let self = this;
                 axios.get(this.$baseUrl + 'ObtenerFacturasCliente', {
                         params: {
                             IdCliente: localStorage.userId,

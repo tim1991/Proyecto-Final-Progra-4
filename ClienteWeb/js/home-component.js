@@ -187,6 +187,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -269,6 +272,9 @@ __webpack_require__.r(__webpack_exports__);
         self.$store.commit('loader', false);
       });
     },
+    obtenerPDF: function obtenerPDF(id) {
+      this.$router.push('/Factura?id=' + id);
+    },
     obtenerFacturasCliente: function obtenerFacturasCliente() {
       var self = this;
       axios.get(this.$baseUrl + 'ObtenerFacturasCliente', {
@@ -321,6 +327,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     deleteCart: function deleteCart(id) {
+      debugger;
       var self = this;
 
       if (this.useriD != 0) {
@@ -438,9 +445,9 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                                    Hola, " +
+                            "\n                                Hola, " +
                               _vm._s(_vm.userName) +
-                              "\n                                "
+                              "\n                            "
                           )
                         ]
                       ),
@@ -468,7 +475,11 @@ var render = function() {
                                 }
                               }
                             },
-                            [_vm._v("Ver mis pedidos")]
+                            [
+                              _vm._v(
+                                "Ver mis\n                                    pedidos"
+                              )
+                            ]
                           )
                         ]
                       )
@@ -511,7 +522,7 @@ var render = function() {
                       _vm._v(
                         " Carrito (" +
                           _vm._s(_vm.itemsCarrito) +
-                          ")\n                                "
+                          ")\n                            "
                       )
                     ]
                   ),
@@ -557,7 +568,7 @@ var render = function() {
                             _vm._v(
                               " " +
                                 _vm._s(item.NombreProducto) +
-                                " x\n                                        " +
+                                " x\n                                    " +
                                 _vm._s(item.Cantidad)
                             )
                           ]
@@ -638,7 +649,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "Agregar\n                                al\n                                carrito"
+                            "Agregar\n                            al\n                            carrito"
                           )
                         ]
                       )
@@ -689,7 +700,21 @@ var render = function() {
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(factura.Total))]),
                         _vm._v(" "),
-                        _vm._m(7, true)
+                        _c("td", [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-info",
+                              attrs: { "data-dismiss": "modal" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.obtenerPDF(factura.IdFactura)
+                                }
+                              }
+                            },
+                            [_vm._v("Ver PDF")]
+                          )
+                        ])
                       ])
                     }),
                     0
@@ -720,7 +745,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(8),
+              _vm._m(7),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _vm.useriD == 0
@@ -755,7 +780,7 @@ var render = function() {
                           ),
                           _vm._v(" "),
                           _c("div", { staticClass: "input-group mb-3" }, [
-                            _vm._m(9),
+                            _vm._m(8),
                             _vm._v(" "),
                             _c("input", {
                               directives: [
@@ -807,7 +832,7 @@ var render = function() {
                           ),
                           _vm._v(" "),
                           _c("div", { staticClass: "input-group mb-3" }, [
-                            _vm._m(10),
+                            _vm._m(9),
                             _vm._v(" "),
                             _c("input", {
                               directives: [
@@ -846,7 +871,7 @@ var render = function() {
                           ])
                         ]),
                         _vm._v(" "),
-                        _vm._m(11)
+                        _vm._m(10)
                       ]
                     )
                   : _vm._e()
@@ -947,14 +972,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Acciones")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("button", { staticClass: "btn btn-info" }, [_vm._v("Ver PDF")])
     ])
   },
   function() {

@@ -465,11 +465,18 @@ var Home = function Home() {
   return Promise.all(/*! import() | home-component */[__webpack_require__.e("/vendor"), __webpack_require__.e("home-component")]).then(__webpack_require__.bind(null, /*! ../components/Home */ "./src/components/Home.vue"));
 };
 
+var PDF = function PDF() {
+  return Promise.all(/*! import() | pdf-component */[__webpack_require__.e("/vendor"), __webpack_require__.e("pdf-component")]).then(__webpack_require__.bind(null, /*! ../components/PDF */ "./src/components/PDF.vue"));
+};
+
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = (new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: [{
     path: '/',
     component: Home
+  }, {
+    path: '/Factura',
+    component: PDF
   }
   /*{
       path: '/Dashboard',

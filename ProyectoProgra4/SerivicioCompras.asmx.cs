@@ -377,7 +377,9 @@ namespace ProyectoProgra4
             {
                 Context.Response.Write("Un error ha ocurrido por favor verifique los datos");
             }
-        }  [WebMethod]
+        }  
+        
+        [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
         public void ObtenerFacturasCliente(int IdCliente)
         {
@@ -389,6 +391,48 @@ namespace ProyectoProgra4
                 Context.Response.ContentType = "application/json";
                 LogicaFactura accionesFactura = new LogicaFactura();
                 List<sp_ObtieneFacturasClienteResult> Respuesta = accionesFactura.ObtenerFacturasCliente(IdCliente);
+                Context.Response.Write(js.Serialize(Respuesta));
+
+            }
+            catch (Exception)
+            {
+                Context.Response.Write("Un error ha ocurrido por favor verifique los datos");
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void ObtenerItemsFactura(int IdFactura)
+        {
+            try
+            {
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                Context.Response.Clear();
+                Context.Response.ContentType = "application/json";
+                LogicaFactura accionesFactura = new LogicaFactura();
+                List<sp_ObtieneFacturasClienteResult> Respuesta = accionesFactura.ObtenerFacturasCliente(IdCliente);
+                Context.Response.Write(js.Serialize(Respuesta));
+
+            }
+            catch (Exception)
+            {
+                Context.Response.Write("Un error ha ocurrido por favor verifique los datos");
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void ObtienerFactura(int IdFactura)
+        {
+            try
+            {
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                Context.Response.Clear();
+                Context.Response.ContentType = "application/json";
+                LogicaFactura accionesFactura = new LogicaFactura();
+                sp_ObtieneFacturaIdResult Respuesta = accionesFactura.ObtenerFacturaCliente(IdFactura);
                 Context.Response.Write(js.Serialize(Respuesta));
 
             }

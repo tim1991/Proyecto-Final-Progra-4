@@ -3,5 +3,6 @@
     "/manifest.js": "/manifest.js",
     "/js//vendor.js": "/js//vendor.js",
     "/js/home-component.js": "/js/home-component.js",
-    "/js/login-component.js": "/js/login-component.js"
+    "/js/login-component.js": "/js/login-component.js",
+    "/js/pdf-component.js": "/js/pdf-component.js"
 }
