@@ -53,7 +53,7 @@
                     <p>Sistemas de compras en linea.</p>
 
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Buscar">
+                        <input type="text" @keyup="getProductsNombre()" v-model="buscar" class="form-control" placeholder="Buscar">
                     </div>
                 </div>
 
@@ -67,7 +67,7 @@
                 </div>
 
 
-                <div v-for="(producto,key) in productList" :key="key" class="col-12 col-md-4 mt-3">
+                <div v-for="(producto,key) in productList " :key="key" class="col-12 col-md-4 mt-3">
                     <div class="card" style="width: 18rem;">
                         <img class="card-img-top" :src="producto.ImagenProducto" alt="Card image cap">
                         <div class="card-body">
@@ -192,6 +192,7 @@
             return {
                 carrito: [],
                 facturas: [],
+                buscar:'',
                 useriD: 0,
                 userName: '',
                 itemsCarrito: 0,
@@ -305,6 +306,24 @@
 
                 let self = this
                 axios.post(this.$baseUrl + 'ObtieneProductos')
+                    .then(function (res) {
+
+                        self.productList = res.data
+                    }).catch(function (err) {
+                        console.log(err)
+
+                    });
+
+            },
+            getProductsNombre: function () {
+
+                let self = this
+                axios.get(this.$baseUrl + 'ObtieneProductosXNombre', {
+                        params: {
+                            NombreProducto: this.buscar,
+                        }
+
+                    })
                     .then(function (res) {
 
                         self.productList = res.data
@@ -439,7 +458,8 @@
                 }
 
             }
-        }
+        },
+        
 
     }
 </script>

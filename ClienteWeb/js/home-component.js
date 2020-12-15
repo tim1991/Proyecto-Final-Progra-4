@@ -197,6 +197,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       carrito: [],
       facturas: [],
+      buscar: '',
       useriD: 0,
       userName: '',
       itemsCarrito: 0,
@@ -292,6 +293,18 @@ __webpack_require__.r(__webpack_exports__);
     getProducts: function getProducts() {
       var self = this;
       axios.post(this.$baseUrl + 'ObtieneProductos').then(function (res) {
+        self.productList = res.data;
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    getProductsNombre: function getProductsNombre() {
+      var self = this;
+      axios.get(this.$baseUrl + 'ObtieneProductosXNombre', {
+        params: {
+          NombreProducto: this.buscar
+        }
+      }).then(function (res) {
         self.productList = res.data;
       })["catch"](function (err) {
         console.log(err);
@@ -595,7 +608,38 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm._m(2)
+          _c("div", { staticClass: "caption" }, [
+            _c("h1", [_vm._v("Bienvenido")]),
+            _vm._v(" "),
+            _c("p", [_vm._v("Sistemas de compras en linea.")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.buscar,
+                    expression: "buscar"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", placeholder: "Buscar" },
+                domProps: { value: _vm.buscar },
+                on: {
+                  keyup: function($event) {
+                    return _vm.getProductsNombre()
+                  },
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.buscar = $event.target.value
+                  }
+                }
+              })
+            ])
+          ])
         ])
       ]
     ),
@@ -605,7 +649,7 @@ var render = function() {
         "div",
         { staticClass: "row" },
         [
-          _vm._m(3),
+          _vm._m(2),
           _vm._v(" "),
           _vm._l(_vm.productList, function(producto, key) {
             return _c(
@@ -664,7 +708,7 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _vm._m(4),
+    _vm._m(3),
     _vm._v(" "),
     _c(
       "div",
@@ -684,11 +728,11 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(5),
+              _vm._m(4),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("table", { staticClass: "table table-striped" }, [
-                  _vm._m(6),
+                  _vm._m(5),
                   _vm._v(" "),
                   _c(
                     "tbody",
@@ -745,7 +789,7 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(7),
+              _vm._m(6),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _vm.useriD == 0
@@ -780,7 +824,7 @@ var render = function() {
                           ),
                           _vm._v(" "),
                           _c("div", { staticClass: "input-group mb-3" }, [
-                            _vm._m(8),
+                            _vm._m(7),
                             _vm._v(" "),
                             _c("input", {
                               directives: [
@@ -832,7 +876,7 @@ var render = function() {
                           ),
                           _vm._v(" "),
                           _c("div", { staticClass: "input-group mb-3" }, [
-                            _vm._m(9),
+                            _vm._m(8),
                             _vm._v(" "),
                             _c("input", {
                               directives: [
@@ -871,7 +915,7 @@ var render = function() {
                           ])
                         ]),
                         _vm._v(" "),
-                        _vm._m(10)
+                        _vm._m(9)
                       ]
                     )
                   : _vm._e()
@@ -895,23 +939,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Productos")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "caption" }, [
-      _c("h1", [_vm._v("Bienvenido")]),
-      _vm._v(" "),
-      _c("p", [_vm._v("Sistemas de compras en linea.")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "text", placeholder: "Buscar" }
-        })
-      ])
-    ])
   },
   function() {
     var _vm = this
